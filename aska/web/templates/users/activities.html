@@ -1,0 +1,10 @@
+<div class="row my-4">
+    <div class="col-md-12">
+        <h5>Recent Activity:</h5>
+        <ul class="list-unstyled">
+            {% for activity in user.recent_activity %}
+            <li>{{ activity }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

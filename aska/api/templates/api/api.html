@@ -1,0 +1,31 @@
+{% extends "rest_framework/base.html" %}
+
+{% block title %}
+{% if name %}{{name}} – {% endif %}Askademy API
+{% endblock %}
+
+{% block branding %}
+<a class='navbar-brand' rel="nofollow" href="{% url 'web:about-askademy'%}">
+    About Askademy
+</a>
+{% endblock %}
+
+{% block style %}
+{{ block.super }}
+<style>
+    a.navbar-text:hover {
+        text-decoration: none;
+        cursor: pointer;
+        color: white;
+    }
+</style>
+{% endblock %}
+
+{% block userlinks %}
+{% if user.is_authenticated %}
+<li class="navbar-text">{{user.get_full_name}}</li>
+<a href="{% url 'api:logout' %}" class="navbar-text">Logout</a>
+{% else %}
+<a href="{% url 'api:login' %}" class="navbar-text">Login</a>
+{% endif %}
+{% endblock %}

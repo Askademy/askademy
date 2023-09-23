@@ -1,0 +1,47 @@
+<!-- Post Comment Section -->
+<div class="card border-1 shadow-sm mt-3">
+    <div class="card-header text-black-100 rounded-top">
+        <h5 class="mb-0 text-center">Comments</h5>
+    </div>
+    <div class="card-body">
+        <div class="comment-list">
+            <!-- Indivdual Comment -->
+            {% for comment in post.comments %}
+            <div class="media mb-4">
+                <img src="{{comment.author.profile_picture.url}}" height="40" class="rounded-circle mr-3" alt="...">
+                <div class="media-body">
+                    <h5 class="mt-0">{{comment.author.full_name}}</h5>
+                    <p class="mb-0">{{comment.content}}</p>
+                    <p class="text-muted mb-0">{{comment.timestamp}}</p>
+                    <div class="d-flex align-items-center mt-2">
+                        <a href="#" class="text-muted mr-3"><i class="fas fa-reply"></i> Reply</a>
+                        <a href="#" class="text-muted"><i class="fas fa-eye"></i> See Replies</a>
+                        <a href="#" class="text-muted ml-3"><i class="fas fa-flag"></i> Report</a>
+                    </div>
+                    <div class="reply-list">
+                        <!-- Replies section -->
+                        {% for reply in comment.replies %}
+                        <div class="media mt-3">
+                            <img src="{{reply.author.profile_picture.url}}" height="30" class="rounded-circle mr-3"
+                                alt="...">
+                            <div class="media-body">
+                                <h5 class="mt-0">{{reply.author.full_name}}</h5>
+                                <p class="mb-0">{{reply.content}}</p>
+                                <p class="text-muted mb-0">{{reply.timestamp}}</p>
+                                <div class="d-flex align-items-center mt-2">
+                                    <a href="#" class="text-muted mr-4"><i class="fas fa-reply"></i> Reply</a>
+                                    <a href="#" class="text-muted"><i class="fas fa-flag"></i> Report</a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <button type="button" class="btn btn-primary btn-block mt-3" data-toggle="modal" data-target="#commentModal">
+            Add Comment
+        </button>
+    </div>
+</div>

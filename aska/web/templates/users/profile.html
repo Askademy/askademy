@@ -1,0 +1,252 @@
+{% extends 'base.html' %}
+{% load custom_filters %}
+{% block title %}{{user.get_full_name}}{% endblock %}
+{% block content %}
+<div class="container my-4">
+  <div class="row">
+
+    <div class="col-md-5 mb-5 pb-5">
+      <div class="card">
+        <!-- User Profile Picture and Name -->
+        <div class="card-body p-0">
+          <img class="img-fluid rounded-img" alt="Profile picture" src="{{ user.profile_picture.url }}" width="128"
+            height="110" style="background-color:lightskyblue" />
+          <div class="d-flex justify-content-between mt-3">
+            <div class="flex-grow-1">
+              <h2 class="card-title text-center m-0">
+                {{ user.get_full_name }}
+                {% if user.nickname %}
+                ({{user.nickname}})
+                {%endif %}
+              </h2>
+              {% if user.get_current_school %}
+              <p class="card-text text-center">{{ user.school.name }}</p>
+              {% endif %}
+            </div>
+            {% if request.user == user %}
+            <button class="btn-sm bg-dark" type="button" data-toggle="modal" data-target="#picture-and-name-update">
+              <i class="fa-solid fa-user-pen fa-beat text-primary"></i>
+            </button>
+            {% endif %}
+          </div>
+          <hr />
+          <!-- User's Personal Info -->
+          <div class="card-header d-flex px-0">
+            <h2 class="flex-grow-1 text-center m-0">Personal info</h2>
+            {% if request.user == user %}
+            <button type="button" class="btn-sm bg-dark" data-toggle="modal" data-target="#personal-info-update">
+              <i class="fa-solid fa-user-pen fa-beat text-primary"></i>
+            </button>
+            {% endif %}
+          </div>
+          <table class="table table-bordered shadow-sm">
+            <tbody>
+              <tr>
+                <th>Gender</th>
+                <td>{{ user.get_gender_display }}</td>
+              </tr>
+              <tr>
+                <th>Birthdate</th>
+                <td>{{ user.birthdate }}</td>
+              </tr>
+              <tr>
+                <th>Email</th>
+                <td>{{ user.email }}</td>
+              </tr>
+              <tr>
+                <th>Phone Number</th>
+                <td>{{ user.phone_number }}</td>
+              </tr>
+              {% if user.bio %}
+              <tr>
+                <th class="align-middle">Bio</th>
+                <td>{{ user.bio }}</td>
+              </tr>
+              {% endif %}
+            </tbody>
+          </table>
+          <!-- User's School Info -->
+          <div class="card-header d-flex px-0">
+            <h2 class="flex-grow-1 text-center m-0">School info</h2>
+            {% if request.user == user %}
+            <button type="button" class="btn-sm bg-dark" data-toggle="modal" data-target="#edit-user-school-info">
+              <i class="fa-solid fa-user-pen fa-beat text-primary"></i>
+            </button>
+            {% endif %}
+          </div>
+          <table class="table table-bordered shadow-sm">
+            <tbody>
+              <tr>
+                <th>Current school</th>
+                <td>{{ user_school.school.name }}</td>
+              </tr>
+              <tr>
+                <th>Level</th>
+                <td>{{ user.get_level_display }}</td>
+              </tr>
+              {% if user.subjects %}
+              <tr>
+                <th>Best subjects</th>
+                <td>
+                  <ul class="list-unstyled">
+                    {% for subject in user.subjects.all %}
+                    <li>
+                      <span>{{ subject.name }}</span>
+                    </li>
+                    {% endfor %}
+                  </ul>
+                </td>
+              </tr>
+              {% endif %}
+            </tbody>
+          </table>
+          <!-- User's Educational History -->
+          <div class="card-header d-flex px-0">
+            <h2 class="flex-grow-1 text-center m-0">Educational history</h2>
+            {% if request.user == user %}
+            <button type="button" class="btn btn-sm bg-dark" data-toggle="modal" data-target="#picture-and-name-update">
+              <i class="fa-solid fa-user-pen fa-beat text-primary"></i>
+            </button>
+            {% endif %}
+          </div>
+          <table class="table table-bordered shadow-sm">
+            <tbody>
+              <tr>
+                <th>School Name</th>
+                <th>Location</th>
+              </tr>
+              {% for education in user.schools.all %}
+              <tr>
+                <td>{{education.school.name}}</td>
+                <td>{{ education.school.town }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          <!-- User's Important Dates -->
+          <h2 class="card-header text-center p-2">Important dates</h2>
+          <table class="table table-bordered shadow">
+            <tbody>
+              <tr>
+                <th>Last Seen</th>
+                <td>{{ user.last_login }}</td>
+              </tr>
+              <tr>
+                <th>Date Joined</th>
+                <td>{{ user.date_joined }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-md-7">
+      <!-- Friends and mates navigation tabs -->
+      {% include "users/friends_and_mates_nav.html"%}
+
+      <h2 class="text-center mt-4">{{user.first_name}}'s Posts</h2>
+      {% for post in posts %}
+      {% include "posts/post.html" %}
+      {% endfor %}
+
+      <!-- User's Recent Activity -->
+      {% include "users/activities.html" %}
+    </div>
+  </div>
+</div>
+
+<!-- Perosonal Information Update Modal -->
+{% include "users/modals/personal_info_update.html"%}
+
+<!-- Profile Picture And Name Update Modal -->
+{% include "users/modals/picture_and_names_update.html"%}
+
+<!-- User School Information Update Modal -->
+{% include "users/modals/school_info_update.html"%}
+
+<!-- Create Comment Modal -->
+{% include "posts/create_comment_modal.html" %}
+
+<!-- Post Report Modal -->
+{% include "posts/report_modal.html"%}
+
+<script>
+  // JavaScript to handle the form submission
+  function previewFile() {
+    var preview = document.getElementById('preview');
+    var file = document.getElementById('profile_picture').files[0];
+    var reader = new FileReader();
+
+    reader.onloadend = function () {
+      preview.src = reader.result;
+    }
+    if (file) {
+      reader.readAsDataURL(file);
+    } else {
+      preview.src = "#";
+    }
+  }
+
+  $(document).ready(function () {
+    $("#edit-profile-form").submit(function (event) {
+      // Prevent the form from submitting normally
+      event.preventDefault();
+
+      // Get the form data
+      var formData = new FormData(this);
+
+      // Send the form data to the server using AJAX
+      $.ajax({
+        url: "/edit-profile",
+        type: "POST",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function (response) {
+          // Handle the server response
+        },
+        error: function (xhr, status, error) {
+          // Handle errors
+        }
+      });
+    });
+  });
+
+
+  $('#currentSchool').on('input', function () {
+    $.ajax({
+      url: '/path/to/server-side/script',
+      type: 'POST',
+      dataType: 'json',
+      data: { search: $(this).val() },
+      success: function (data) {
+        var dropdownMenu = $('#currentSchoolDropdownMenu');
+        dropdownMenu.empty();
+        for (var i = 0; i < data.length; i++) {
+          dropdownMenu.append('<a class="dropdown-item" href="#">' + data[i] + '</a>');
+        }
+        dropdownMenu.show();
+      }
+    });
+  });
+</script>
+{% endblock %}
+
+{% block style %}
+<style>
+  .img-fluid {
+    max-height: 500px;
+    width: 100%;
+  }
+
+  .elevation {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+
+  .btn.btn-sm.bg-dark {
+    float: right;
+  }
+</style>
+{% endblock %}

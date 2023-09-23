@@ -1,0 +1,80 @@
+<!-- Perosonal Information Update Modal -->
+<div class="modal fade" id="personal-info-update" tabindex="-1" role="dialog"
+    aria-labelledby="personal-info-modal-title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="personal-info-modal-title">Update Personal Information</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form>
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="gender">Gender</label>
+                            <input type="text" class="form-control" id="gender" name="gender"
+                                value="{{ user.get_gender_display }}" readonly>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="birthdate">Birthdate</label>
+                            <input type="text" class="form-control" id="birthdate" name="birthdate"
+                                value="{{ user.birthdate }}" readonly>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="phone_number">Phone Number</label>
+                            <input type="text" class="form-control" id="phone_number" name="phone_number"
+                                value="{{ user.phone_number }}">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="bio">Bio</label>
+                        <textarea class="form-control" id="bio" name="bio" rows="3">{{ user.bio }}</textarea>
+                    </div>
+
+                    <!-- Privacy settings -->
+                    <h6>Privacy Settings:</h6>
+                    <p class="text-muted">
+                        <small>Note: Please check the corresponding checkbox if you want your gender, email, or
+                            birthdate to be
+                            shown publicly. Otherwise, leave it unchecked to keep the information private.</small>
+                    </p>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="public" id="gender_privacy"
+                            name="gender_privacy">
+                        <label class="form-check-label" for="gender_privacy">
+                            Gender
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="public" id="email_privacy"
+                            name="email_privacy">
+                        <label class="form-check-label" for="email_privacy">
+                            Email
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="public" id="phone_number_privacy"
+                            name="phone_number_privacy">
+                        <label class="form-check-label" for="phone_number_privacy">
+                            Phone Number
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,45 @@
+{% load custom_filters %}
+<div class="card border-1 mb-4">
+    <div class="card-header">
+        <div class="media align-items-center">
+            <img src="{{post.author.profile_picture.url}}" height="50" width="50" class="rounded-circle mr-3"
+                alt="Author picture">
+            <div class="media-body">
+                <h5 class="mb-0 h3"><a class="text-dark text-decoration-none"
+                        href="{% url 'web:user-profile' post.author.id %}">{{post.author.get_full_name}}</a></h5>
+                <p class="text-muted mb-0">{{post.timestamp|relative_time}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <p class="text-big">
+            {{post.content}}
+        </p>
+        <!-- Image Attach to the post -->
+        {% if post.image %}
+        <img src="{{post.image.url}}" class="post-attached-image" alt="Attached image to the post">
+        {% endif %}
+        <div class="post-controls">
+            <!-- Post Controls -->
+            <div class="d-flex justify-content-between mx-3">
+                <div><i class="fa-solid fa-thumbs-up text-primary"></i> {{post.likes.all.count}}</div>
+                <div>
+                    <span class="mr-3"><i class="fa-solid fa-comment"></i> {{post.comments.all.count}}</span>
+                    <span><i class="fa-solid fa-share-square"></i> {{post.shares}}</span>
+                </div>
+            </div>
+            <hr class="my-2">
+            <div class="d-flex justify-content-between mx-5">
+                <button type="button">
+                    <i class="far fa-thumbs-up"></i> like
+                </button>
+                <button type="button" data-toggle="modal" data-target="#commentModal" aria-controls="commentSection">
+                    <i class="far fa-comment"></i> comment
+                </button>
+                <button type="button">
+                    <i class="far fa-share-square"></i> Share
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

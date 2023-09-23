@@ -1,0 +1,48 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyo
+__init__.pyc
+__init__.pyo
+
+# Local development settings
+*.env
+
+# Virtual environment
+venv/
+env/
+ENV/
+
+# IDE settings
+.vscode/
+*.sublime-project
+*.sublime-workspace
+*.pycharm*
+*.idea/
+*.egg-info/
+
+# Database
+*.sqlite3
+
+# Log files
+*.log
+
+# Compiled Python files
+*.pyc
+
+# Local Django settings
+local_settings.py
+
+# Media files
+media/
+
+
+
+# Secret keys
+*.secret
+
+# Dependency directories
+__pycache__/
+node_modules/
+
+

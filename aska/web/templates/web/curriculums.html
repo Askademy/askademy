@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}Curriculums{% endblock %}
+{% block content %}
+
+<h1>Select a Curriculum</h1>
+
+{% if curriculums %}
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for grade in grades %}
+    <div class="col">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title text-center">Grade {{ grade }}</h2>
+            </div>
+            <div class="card-body">
+                <div class="row row-cols-1 row-cols-md-2 g-4">
+                    {% for curriculum in curriculums %}
+                    {% if curriculum.grade == grade %}
+                    <a href="">
+                        <div class="col mb-4">
+                            <div class="card">
+                                <img src="{{ request.user.profile_picture.url }}" alt="{{ curriculum.subject }}"
+                                    class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ curriculum.subject }}</h5>
+                                    <p class="card-text">Grade: {{ curriculum.grade }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<p>No curriculums found.</p>
+{% endif %}
+
+{% endblock %}

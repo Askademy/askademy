@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}Lesson{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-3 border-right">
+        <nav class="nav flex-column">
+            {% for strand in strands %}
+            <a class="nav-link" data-toggle="collapse" href="#strand-{{ forloop.counter }}" role="button"
+                aria-expanded="false" aria-controls="strand-{{ forloop.counter }}">
+                {{ strand.name }}
+            </a>
+            <div class="collapse" id="strand-{{ forloop.counter }}">
+                {% for substrand in strand.substrands %}
+                <a class="nav-link ml-2" data-toggle="collapse"
+                    href="#substrand-{{ forloop.parentloop.counter }}{{ forloop.counter }}" role="button"
+                    aria-expanded="false"
+                    aria-controls="substrand-{{ forloop.parentloop.counter }}{{ forloop.counter }}">
+                    {{ substrand.name }}
+                </a>
+                <div class="collapse" id="substrand-{{ forloop.parentloop.counter }}{{ forloop.counter }}">
+                    {% for topic in substrand.topics %}
+                    <a class="nav-link ml-4" href="#"
+                        onclick="loadTopic('{{ topic.content|escapejs }}', '{{ topic.name|escapejs }}')">
+                        {{ topic.name }}
+                    </a>
+                    {% endfor %}
+                </div>
+                {% endfor %}
+            </div>
+            {% endfor %}
+        </nav>
+    </div>
+    <div class="col-lg-9">
+        <h2 id="topic-name">Select a topic to display content</h2>
+        <div id="topic-content"></div>
+    </div>
+</div>
+
+<script>
+    function loadTopic(content, name) {
+        document.getElementById('topic-name').innerHTML = name;
+        document.getElementById('topic-content').innerHTML = content;
+        return false; // prevent default link behavior
+    }
+</script>
+{% endblock %}
