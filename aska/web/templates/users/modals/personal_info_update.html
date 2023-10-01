@@ -9,13 +9,14 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form>
+            <form method="post" action="{% url "web:update-user-profile" %}">
+                {% csrf_token %}
                 <div class="modal-body">
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="gender">Gender</label>
                             <input type="text" class="form-control" id="gender" name="gender"
-                                value="{{ user.get_gender_display }}" readonly>
+                                value="{{ user.gender }}" readonly>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="birthdate">Birthdate</label>

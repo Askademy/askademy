@@ -4,7 +4,6 @@
 {% block content %}
 <div class="container my-4">
   <div class="row">
-
     <div class="col-md-5 mb-5 pb-5">
       <div class="card">
         <!-- User Profile Picture and Name -->
@@ -49,10 +48,12 @@
                 <th>Birthdate</th>
                 <td>{{ user.birthdate }}</td>
               </tr>
+              {% if user.email %}
               <tr>
                 <th>Email</th>
                 <td>{{ user.email }}</td>
               </tr>
+              {% endif %}
               <tr>
                 <th>Phone Number</th>
                 <td>{{ user.phone_number }}</td>
@@ -66,6 +67,7 @@
             </tbody>
           </table>
           <!-- User's School Info -->
+          {% if user_has_school_info %}
           <div class="card-header d-flex px-0">
             <h2 class="flex-grow-1 text-center m-0">School info</h2>
             {% if request.user == user %}
@@ -76,10 +78,12 @@
           </div>
           <table class="table table-bordered shadow-sm">
             <tbody>
+              {% if user_school.school %}
               <tr>
                 <th>Current school</th>
                 <td>{{ user_school.school.name }}</td>
               </tr>
+              {% endif %}
               <tr>
                 <th>Level</th>
                 <td>{{ user.get_level_display }}</td>
@@ -100,7 +104,9 @@
               {% endif %}
             </tbody>
           </table>
+          {% endif %}
           <!-- User's Educational History -->
+          {% if user.schools.count %}
           <div class="card-header d-flex px-0">
             <h2 class="flex-grow-1 text-center m-0">Educational history</h2>
             {% if request.user == user %}
@@ -123,6 +129,7 @@
               {% endfor %}
             </tbody>
           </table>
+          {% endif %}
           <!-- User's Important Dates -->
           <h2 class="card-header text-center p-2">Important dates</h2>
           <table class="table table-bordered shadow">
@@ -149,6 +156,8 @@
       <h2 class="text-center mt-4">{{user.first_name}}'s Posts</h2>
       {% for post in posts %}
       {% include "posts/post.html" %}
+      {% empty %}
+      <p>No posts available</p>
       {% endfor %}
 
       <!-- User's Recent Activity -->

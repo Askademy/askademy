@@ -7,8 +7,8 @@
         <div class="card">
             <div class="card-body">
                 <div class="d-flex align-items-center mb-4">
-                    <img src="https://via.placeholder.com/50" alt="Profile Picture" class="rounded-circle mr-3">
-                    <h5 class="card-title mb-0">{{request.user.get_full_name}}</h5>
+                    <img height="50" width="50" src="{{request.user.profile_picture.url}}" alt="Profile Picture" class="rounded-circle mr-3">
+                    <h5 class="card-title mb-0"><a class="text-decoration-none" href="{% url "web:user-profile" request.user.id %}">{{request.user.get_full_name}}</a></h5>
                 </div>
                 <ul class="list-group">
                     <li class="list-group-item">
@@ -50,7 +50,7 @@
     <div class="col-md-6 right-panel">
         <div class="row">
             <div class="col">
-                <div class="card">
+                <form method="post" action="create-post/" class="card">
                     <div class="card-body">
                         <div class="media">
                             <img src="https://via.placeholder.com/50" class="align-self-start mr-3 rounded-circle"
@@ -59,7 +59,7 @@
                                 <div class="form-group">
                                     <label for="post-input">What's on your mind?</label>
                                     <textarea class="form-control" id="post-input" rows="3"
-                                        placeholder="Write something..."></textarea>
+                                        placeholder="Write something..." required></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="image-input">Select an image:</label>
@@ -70,13 +70,13 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button type="button" class="btn btn-primary">Post</button>
+                        <button type="submit" class="btn btn-primary">Post</button>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
 
-        <h2 class="text-center">Feeds</h2>
+        <h2 class="text-center mt-3">Feeds</h2>
         {% for post in posts %}
         {% include "posts/post.html" %}
         {% endfor %}

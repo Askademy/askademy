@@ -18,17 +18,19 @@
           <h2 class="text-muted mb-0 text-center">Friends</h2>
         </div>
         <ul class="list-group list-group-flush">
-          {% for friend in friends|slice:":4" %}
+          {% for friend in user.get_friends|slice:":4" %}
           <li class="list-group-item py-3">
             <div class="media">
-              <img src="{{ user.profile_picture.url }}" alt="{{ friend.friend.username }}" class="mr-3 rounded-circle"
+              <img src="{{ friend.profile_picture.url }}" alt="profile pic" class="mr-3 rounded-circle"
                 height="60">
               <div class="media-body">
-                <h5 class="mt-0 mb-1">{{ friend.friend.username }}</h5>
-                <p class="text-muted mb-0">{{ friend.friend.email }}</p>
+                <h5><a href="{% url "web:user-profile" friend.id %}">{{ friend.get_full_name }}</a></h5>
+                {% if friend.email %}
+                <p class="text-muted mb-0">{{ friend.email }}</p>
+                {% endif %}
               </div>
               <div class="ml-auto">
-                {% if friend.friend.status == "online" %}
+                {% if friend.status == "online" %}
                 <span class="badge badge-success">Online</span>
                 {% else %}
                 <span class="badge badge-secondary">Offline</span>
@@ -37,8 +39,10 @@
               </div>
             </div>
           </li>
+          {% empty %}
+          <h5 class="text-center">No friends to show</h5>
           {% endfor %}
-          {% if friends|length > 4 %}
+          {% if user.get_friends|length > 4 %}
           <li class="list-group-item py-3">
             <a href="#" class="btn btn-sm btn-outline-secondary rounded-pill">See more</a>
           </li>
@@ -48,23 +52,23 @@
     </div>
     <div class="tab-pane fade" id="level-mates">
       <!-- User's Level mates lists -->
-      {% if friends %}
       <div class="card mb-4">
         <div class="card-header bg-white">
           <h2 class="text-muted mb-0 text-center">Level mates</h2>
         </div>
         <ul class="list-group list-group-flush">
-          {% for friend in friends|slice:":4" %}
+          {% for mate in user.get_level_mates|slice:":4" %}
           <li class="list-group-item py-3">
             <div class="media">
-              <img src="{{ user.profile_picture.url }}" alt="{{ friend.friend.username }}" class="mr-3 rounded-circle"
-                height="60">
+              <img src="{{ mate.profile_picture.url }}" alt="profile pic" class="mr-3 rounded-circle" height="60">
               <div class="media-body">
-                <h5 class="mt-0 mb-1">{{ friend.friend.username }}</h5>
-                <p class="text-muted mb-0">{{ friend.friend.email }}</p>
+                <h5 class="mt-0 mb-1"><a href="{% url "web:user-profile" mate.id %}">{{ mate.get_full_name }}</a></h5>
+                {% if mate.email %}
+                <p class="text-muted mb-0">{{ mate.email }}</p>
+                {% endif %}
               </div>
               <div class="ml-auto">
-                {% if friend.friend.status == "online" %}
+                {% if mate.status == "online" %}
                 <span class="badge badge-success">Online</span>
                 {% else %}
                 <span class="badge badge-secondary">Offline</span>
@@ -73,32 +77,33 @@
               </div>
             </div>
           </li>
+          {% empty %}
+          <h5 class="text-center">No Level mates to show</h5>
           {% endfor %}
-          {% if friends|length > 4 %}
+          {% if user.level_mates|length > 4 %}
           <li class="list-group-item py-3">
             <a href="#" class="btn btn-sm btn-outline-secondary rounded-pill">See more</a>
           </li>
           {% endif %}
         </ul>
       </div>
-      {% endif %}
     </div>
     <div class="tab-pane fade" id="school-mates">
       <!-- User's School Mates lists -->
-      {% if friends %}
       <div class="card mb-4">
         <div class="card-header bg-white">
           <h2 class="text-muted mb-0 text-center">School Mates</h2>
         </div>
         <ul class="list-group list-group-flush">
-          {% for mate in friends|slice:":4" %}
+          {% for mate in user.get_school_mates|slice:":4" %}
           <li class="list-group-item py-3">
             <div class="media">
-              <img src="{{ user.profile_picture.url }}" alt="{{ friend.friend.username }}" class="mr-3 rounded-circle"
-                height="60">
+              <img src="{{ user.profile_picture.url }}" alt="profile pic" class="mr-3 rounded-circle" height="60">
               <div class="media-body">
-                <h5 class="mt-0 mb-1">{{ mate.friend.username }}</h5>
-                <p class="text-muted mb-0">{{ mate.friend.email }}</p>
+                <h5 class="mt-0 mb-1">{{ mate.get_full_name }}</h5>
+                {% if mate.email %}
+                <p class="text-muted mb-0">{{ mate.email }}</p>
+                {% endif %}
               </div>
               <div class="ml-auto">
                 {% if mate.friend.status == "online" %}
@@ -110,15 +115,16 @@
               </div>
             </div>
           </li>
+          {% empty %}
+          <h5 class="text-center">No school mates to show</h5>
           {% endfor %}
-          {% if friends|length > 4 %}
+          {% if user.get_school_mates|length > 4 %}
           <li class="list-group-item py-3">
             <a href="#" class="btn btn-sm btn-outline-secondary rounded-pill">See more</a>
           </li>
           {% endif %}
         </ul>
       </div>
-      {% endif %}
     </div>
   </div>
 </div>

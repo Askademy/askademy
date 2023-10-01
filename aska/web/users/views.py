@@ -17,14 +17,11 @@ class UserProfileView(generic.TemplateView):
         user = get_object_or_404(CustomUser, pk=pk)
         context = super().get_context_data(**kwargs)
         context["user"] = get_object_or_404(CustomUser, pk=pk)
-        # context["user_has_school_info"] = any(
-        #     x for x in [user.schools.all(), user.subjects.count(), user.level]
-        # )
+        context["user_has_school_info"] = any(
+            x for x in [user.schools.all(), user.subjects.count(), user.level]
+        )
         context["user_school"] = user.get_current_school()
-        context["posts"] = dummy.posts
-        context["friends"] = dummy.friends
-        context["user_photos"] = dummy.album["user_photos"]
-        context["user_videos"] = dummy.album["user_videos"]
+        context["posts"] = user.posts.all()
         return context
 
 

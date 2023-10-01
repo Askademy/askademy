@@ -2,6 +2,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework import viewsets
 
+from .filters import SchoolFilter
 from records.schools.models import School
 from records.schools.serializers import (
     SchoolSerializer,
@@ -13,6 +14,7 @@ from records.schools.serializers import (
 class SchoolProfileViewSet(viewsets.ModelViewSet):
     queryset = School.objects.all()
     serializer_class = SchoolSerializer
+    filterset_class = SchoolFilter
 
     def get_serializer_class(self):
         if self.action == "pictures":

@@ -5,6 +5,7 @@ from django.utils import timezone
 from django.contrib.auth.models import AbstractUser
 import random
 import os
+from itertools import chain
 
 from . import choices
 from .managers import CustomUserManager
@@ -124,13 +125,15 @@ class CustomUser(AbstractUser):
         )
 
     def get_suggested_friends(self):
-        friendship = Friendship.objects.filter(
-            models.Q(sender=self) | models.Q(receiver=self)
-        )
-        related_user_ids = list(*friendship.values_list("sender", "receiver"))
-        return self.__class__.objects.exclude(id__in=related_user_ids).exclude(
-            id=self.id
-        )
+        # Fetch friendships where the current user is either the sender or receiver
+        friendship = Friendship.objects.filter(models.Q(sender=self) | models.Q(receiver=self))
+        
+        # Extract user IDs from the sender and receiver fields in the friendships
+        related_user_ids = list(chain.from_iterable(friendship.values_list("sender", "receiver")))
+        
+        # Exclude the current user and users already in friendships from the suggested friends
+        return self.__class__.objects.exclude(id__in=related_user_ids).exclude(id=self.id)
+
 
     def get_level_mates(self):
         """Return the user's level mates"""

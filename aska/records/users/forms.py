@@ -1,4 +1,5 @@
 import calendar
+from typing import Any
 from django import forms
 from django.db import models
 from django.utils import timezone
@@ -9,6 +10,16 @@ from .choices import SEND_CODE_TO
 
 
 class UpdateUserForm(forms.ModelForm):
+    def __init__(self, data=None, *args, **kwargs):
+        super().__init__(data, *args, **kwargs)
+        # If there is data in the request, exclude fields not in the request
+        if data:
+            available_fields = set(data.keys())
+            fields_to_exclude = set(self.fields.keys()) - available_fields
+
+            for field_name in fields_to_exclude:
+                del self.fields[field_name]
+
     class Meta:
         model = CustomUser
         fields = [
@@ -21,7 +32,7 @@ class UpdateUserForm(forms.ModelForm):
             "gender",
             "bio",
             "profile_picture",
-            "cover_picture",
+            # "cover_picture",
             "subjects",
             "level",
         ]

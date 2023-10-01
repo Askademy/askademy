@@ -91,17 +91,15 @@ WSGI_APPLICATION = "aska.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": "db.sqlite3"
-        # "NAME": "askademy_db",
-        # "USER": os.getenv("SQL_USER"),
-        # "PASSWORD": os.getenv("SQL_PASSWORD"),
-        # "HOST": "localhost",
-        # "PORT": "3306",
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'db.sqlite3',
     }
 }
+
+
 
 
 # Password validation
@@ -167,7 +165,8 @@ REST_FRAMEWORK = {
     "DEFAULT_RENDERER_CLASSES": [
         "api.renderers.CustomBrowsableAPIRender",
         "rest_framework.renderers.JSONRenderer",
-    ]
+    ],
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
 }
 
 

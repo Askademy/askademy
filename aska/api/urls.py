@@ -7,6 +7,7 @@ from .views import (
     CurriculumViewSet,
     AssessmentViewSet,
     SearchViewSet,
+    FeedsViewSet,
 )
 
 app_name = "api"
@@ -18,6 +19,7 @@ router.register(r"schools", SchoolProfileViewSet, basename="schools")
 router.register(r"curriculums", CurriculumViewSet, basename="curriculums")
 router.register(r"assessments", AssessmentViewSet, basename="assessments")
 router.register(r"search", SearchViewSet, basename="search")
+router.register(r"feeds", FeedsViewSet, basename="feeds")
 
 
 urlpatterns = [

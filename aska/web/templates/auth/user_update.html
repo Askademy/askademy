@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
-
+{% load crispy_forms_tags %}
+{% block title %}Update Your Profile{% endblock %}
 {% block content %}
 <div class="container mt-5">
   <div class="row">
@@ -8,22 +9,23 @@
         <div class="card-body text-center">
           <img
             src="{{ user.profile_picture.url }}"
-            alt="{{ user.username }}"
+            alt="profile picture"
             class="img-fluid mb-3"
             style="width: 100%; height: 250px"
           />
-          <h4 class="card-title">{{ user.full_name }}</h4>
+          <h4 class="card-title">{{ user.get_full_name }}</h4>
           {% if user.bio %}
-          <p class="card-text">{{ user.bio }}</p>
+          <p class="card-text">{{user.bio}}</p>
           {% endif %}
         </div>
         <ul class="list-group list-group-flush">
+          {% if user.email %}
           <li class="list-group-item">
             <i class="fa fa-envelope-o pr-2"></i>{{ user.email }}
           </li>
+          {% endif %}
           <li class="list-group-item">
-            <i class="fa fa-calendar pr-2"></i>Joined {{
-            user.date_joined|date:"F Y" }}
+            <i class="fa fa-calendar pr-2"></i>Joined {{user.date_joined|date:"F Y" }}
           </li>
         </ul>
       </div>
@@ -32,44 +34,10 @@
       <div class="card">
         <div class="card-body">
           <h4 class="card-title">Edit Profile</h4>
-          <form method="POST" enctype="multipart/form-data">
+          <form method="post" action="." enctype="multipart/form-data">
             {% csrf_token %}
-            <div class="form-group">
-              <label for="id_username">Username:</label>
-              <input
-                type="text"
-                name="username"
-                id="id_username"
-                class="form-control"
-                value="{{ user.username }}"
-                required
-              />
-            </div>
-            <div class="form-group">
-              <label for="id_email">Email:</label>
-              <input
-                type="email"
-                name="email"
-                id="id_email"
-                class="form-control"
-                value="{{ user.email }}"
-                required
-              />
-            </div>
-            <div class="form-group">
-              <label for="id_profile_picture">Profile Picture:</label>
-              <input
-                type="file"
-                name="profile_picture"
-                id="id_profile_picture"
-                class="form-control-file"
-              />
-            </div>
-            <div class="form-group">
-              <label for="id_bio">Bio:</label>
-              <textarea name="bio" id="id_bio" class="form-control">{{ user.bio }}</textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Save Changes</button>
+            {{form|crispy}}
+            <button type="submit" class="btn btn-primary btn-block">Save changes</button>
           </form>
         </div>
       </div>

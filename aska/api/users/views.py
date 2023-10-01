@@ -14,6 +14,8 @@ from django.shortcuts import get_object_or_404, redirect
 from utils.helpers.verifications import send_verification_code_to_user
 
 from .permissions import IsAuthenticated, UserProfilePermission
+from .filters import CustomUserFilter
+
 from records.users.models import (
     Friendship,
     CustomUser,
@@ -89,6 +91,7 @@ class UserProfileViewSet(viewsets.ModelViewSet):
     queryset = CustomUser.objects.all()
     permission_classes = [UserProfilePermission]
     serializer_class = UserSerializer
+    filterset_class = CustomUserFilter
     lookup_field = "pk"
 
     @action(detail=True, methods=["get", "post"], serializer_class=UserSchoolSerializer)
@@ -134,7 +137,7 @@ class UserProfileViewSet(viewsets.ModelViewSet):
         
         return Response(serializer.data)
 
-    @action(detail=True)
+    @action(detail=True, methods=["GET"])
     def suggested_friends(self, *args, **kwargs):
         suggested_users = self.get_object().get_suggested_friends()
         serializer = self.get_serializer(suggested_users, many=True)

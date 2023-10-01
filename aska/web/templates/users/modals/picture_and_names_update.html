@@ -1,7 +1,8 @@
 <div class="modal fade" id="picture-and-name-update" tabindex="-1" aria-labelledby="editProfileModalLabel"
     aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
+        <form method="post" enctype="multipart/form-data" action="{% url "web:update-user-profile" %}" class="modal-content">
+            {% csrf_token %}
             <div class="modal-header">
                 <h5 class="modal-title" id="editProfileModalLabel">Change Profile Picture and Names</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -9,46 +10,45 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form>
-                    <div class="form-group d-flex justify-content-center">
-                        <div class="col-md-5 text-center">
-                            <img id="preview" src="{{ user.profile_picture.url }}" alt="Current Profile Picture"
-                                style="max-width: 200px; max-height: 200px;" class="mx-auto">
-                        </div>
-                        <div class="col-md-7">
-                            <div class="form-group">
-                                <label for="profile_picture">Profile Picture</label>
-                                <input type="file" class="form-control-file" id="profile_picture"
-                                    onchange="previewFile()">
-                            </div>
+                <div class="form-group d-flex justify-content-center">
+                    <div class="col-md-7 text-center">
+                        <img id="preview" src="{{ user.profile_picture.url }}" alt="Current Profile Picture"
+                            style="max-width: 200px; max-height: 200px;" class="mx-auto">
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="profile_picture">Profile Picture</label>
+                            <input type="file" class="form-control-file" name="profile_picture" id="profile_picture"
+                                onchange="previewFile()">
                         </div>
                     </div>
-
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label for="first_name">First Name</label>
-                            <input type="text" class="form-control" value="{{user.first_name}}" id="first_name">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="middle_name">Middle Name</label>
-                            <input type="text" class="form-control"
-                                value="{% if user.middle_name %}{{user.middle_name}} {% endif %}" id="middle_name">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="last_name">Last Name</label>
-                            <input type="text" class="form-control" value="{{user.last_name}}" id="last_name">
-                        </div>
+                </div>
+        
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="first_name">First Name</label>
+                        <input type="text" class="form-control" name="first_name" value="{{user.first_name}}" id="first_name">
                     </div>
-                    <div class="form-group">
-                        <label for="nickname">Nickname</label>
-                        <input type="text" class="form-control" value="{{user.nickname}}" id="nickname">
+                    <div class="form-group col-md-4">
+                        <label for="middle_name">Middle Name</label>
+                        <input type="text" class="form-control" name="middle_name"
+                            value="{% if user.middle_name %}{{user.middle_name}}{% endif %}" id="middle_name">
                     </div>
-                </form>
+                    <div class="form-group col-md-4">
+                        <label for="last_name">Last Name</label>
+                        <input type="text" class="form-control" name="last_name" value="{{user.last_name}}" id="last_name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="nickname">Nickname</label>
+                    <input type="text" class="form-control" name="nickname" value="{% if user.username %}{{user.nickname}}{% endif %}" id="nickname">
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
             </div>
-        </div>
+        </form>
+        
     </div>
 </div>

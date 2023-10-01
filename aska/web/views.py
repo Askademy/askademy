@@ -62,7 +62,7 @@ class UpdateUserProfileView(generic.UpdateView):
     model = CustomUser
     form_class = UpdateUserForm
     template_name = "auth/user_update.html"
-    success_url = reverse_lazy("web:home")
+    success_url = reverse_lazy("web:update-user-profile")
 
     def get_object(self, *args, **kwargs):
         return self.request.user

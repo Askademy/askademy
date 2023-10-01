@@ -14,7 +14,7 @@ from records.curriculums.serializers import (
     StrandSerializer,
     LessonSerializer,
 )
-from api.filters import (
+from .filters import (
     DynamicFilterBackend,
     LessonFilter,
     CurriculumFilter,
