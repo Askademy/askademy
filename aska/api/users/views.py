@@ -16,6 +16,7 @@ from utils.helpers.verifications import send_verification_code_to_user
 from .permissions import IsAuthenticated, UserProfilePermission
 from .filters import CustomUserFilter
 
+from records.others import Notification
 from records.users.models import (
     Friendship,
     CustomUser,
@@ -30,7 +31,8 @@ from records.users.serializers import (
     ForgotPasswordSerializer,
     ResetPasswordSerializer,
 )
-
+from records.serializers import NotificationSerializer
+from records.feeds.serializers import PostSerializer
 
 class LoginView(generics.GenericAPIView):
     """
@@ -93,6 +95,21 @@ class UserProfileViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     filterset_class = CustomUserFilter
     lookup_field = "pk"
+
+    @action(detail=True, serializer_class=PostSerializer)
+    def posts(self, request, *args, **kwargs):
+        user = self.get_object()
+        posts = user.posts.all()
+        serializer = self.get_serializer(posts, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    @action(detail=True, serializer_class=NotificationSerializer)
+    def notifications(self, request, *args, **kwargs):
+        user = self.get_object()
+        notifs = user.notifications.all()
+        serializer = self.get_serializer(notifs, many=True)
+        return Response(serializer.data)
+
 
     @action(detail=True, methods=["get", "post"], serializer_class=UserSchoolSerializer)
     def schools(self, request, *args, **kwargs):

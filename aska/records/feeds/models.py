@@ -14,7 +14,7 @@ class Post(models.Model):
     likes = models.ManyToManyField(CustomUser, related_name="liked_posts", blank=True)
 
     def __str__(self):
-        return f"Post {self.id} by {self.author}"
+        return f"Post {self.id}"
 
 
 class Comment(models.Model):

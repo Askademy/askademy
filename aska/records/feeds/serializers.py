@@ -13,7 +13,7 @@ class PostSerializer(serializers.ModelSerializer):
         return {
             "author": instance.author.get_full_name(),
             "content": instance.content,
-            "likes": list(instance.likes.all()),
+            "likes": instance.likes.count(),
             "image": instance.image.url if instance.image else None
         }
     
