@@ -7,6 +7,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("web.urls")),
     path("api/", include("api.urls")),
+    path("chat/", include("chat.urls")),
     path("select2/", include("django_select2.urls")),
 ]
 
