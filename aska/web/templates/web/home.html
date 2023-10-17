@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}Home{% endblock %}
 {% block content %}
 
@@ -7,8 +8,13 @@
         <div class="card">
             <div class="card-body">
                 <div class="d-flex align-items-center mb-4">
-                    <img height="50" width="50" src="{{request.user.profile_picture.url}}" alt="Profile Picture" class="rounded-circle mr-3">
-                    <h5 class="card-title mb-0"><a class="text-decoration-none" href="{% url "web:user-profile" request.user.id %}">{{request.user.get_full_name}}</a></h5>
+                    {% if request.user.is_authenticated %}
+                        <img height="50" width="50" src="{{request.user.profile_picture.url}}" alt="Profile Picture" class="rounded-circle mr-3">
+                        <h5 class="card-title mb-0"><a class="text-decoration-none" href="{% url 'web:user-profile' request.user.id %}">{{request.user.get_full_name}}</a></h5>
+                    {% else %}
+                        <img height="50" width="50" src="{% static 'images/unauthenticated-user.jpg' %}" alt="Profile Picture" class="rounded-circle mr-3">
+                        <h5 class="card-title mb-0"><a class="text-decoration-none" href="##">Anonymous</a></h5>
+                    {% endif %}
                 </div>
                 <ul class="list-group">
                     <li class="list-group-item">
@@ -24,7 +30,7 @@
                         <a href="#"><i class="fas fa-question-circle mr-2"></i>Quizzes</a>
                     </li>
                     <li class="list-group-item">
-                        <a href="#"><i class="fas fa-comments mr-2"></i>Chat</a>
+                        <a href='{% url "chat:home" %}'><i class="fas fa-comments mr-2"></i>Chat</a>
                     </li>
                     <li class="list-group-item">
                         <a href="#"><i class="fas fa-bell mr-2"></i>Notifications</a>
