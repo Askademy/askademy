@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load chat_filters %}
 
 {% block title %}Chat{% endblock %}
 
@@ -9,8 +10,20 @@
 
 {% block content %}
 <div class="chat-container">
+    <p class="d-none" id="users-data">{{users|to_json}}</p>
+    <p class="d-none" id="current-user">{{current_user|to_json}}</p>
     <div class="user-panel" id="userPanel">
         <!-- Users will be dynamically added here using JavaScript -->
+        {% for user in users %}
+        <div class="user" data-id="{{user.id}}" onclick="selectUser({{user}})">
+            <img src="{{user.profile_picture}}" alt="{{user.username}}">
+            <div class="user-info">
+                <h4>{{user.username}}</h4>
+                <p class="last-message">{{user.messages|last}}</p>
+            </div>
+            <div class="status {% if user.status == online %}online{% else %}offline{% endif %}"></div>
+        </div>
+        {% endfor %}
     </div>
     <div class="chat-panel">
         <div class="chat-header" id="chatHeader">

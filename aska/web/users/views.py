@@ -5,10 +5,12 @@ from django.views import generic
 from records.users.models import CustomUser
 from records.users.forms import RegistrationForm, ForgotPasswordForm, ResetPasswordForm
 from utils.helpers.verifications import send_verification_code_to_user
+from django.urls import reverse, reverse_lazy
 
 
 from web import dummy
-
+from records.users.forms import UpdateUserForm
+from records.users.models import CustomUser
 
 class UserProfileView(generic.TemplateView):
     template_name = "users/profile.html"
@@ -24,6 +26,18 @@ class UserProfileView(generic.TemplateView):
         context["posts"] = user.posts.all()
         return context
 
+
+class UpdateUserProfileView(generic.UpdateView):
+    model = CustomUser
+    form_class = UpdateUserForm
+    template_name = "users/user_update.html"
+
+    def get_object(self, *args, **kwargs):
+        return self.request.user
+    
+    def get_success_url(self):
+        return reverse("web:user-profile", args=[self.request.user.pk])
+    
 
 def login_view(request):
     form = {"error": None, "message": ""}

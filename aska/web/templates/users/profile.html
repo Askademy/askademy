@@ -10,6 +10,9 @@
         <div class="card-body p-0">
           <img class="img-fluid rounded-img" alt="Profile picture" src="{{ user.profile_picture.url }}" width="128"
             height="110" style="background-color:lightskyblue" />
+          {% if request.user == user %}
+            <a href="{% url 'web:update-user-profile' %}">Visit update section</a>
+          {% endif %}
           <div class="d-flex justify-content-between mt-3">
             <div class="flex-grow-1">
               <h2 class="card-title text-center m-0">

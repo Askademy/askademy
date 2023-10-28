@@ -11,14 +11,13 @@ class Subject(models.Model):
     def __str__(self):
         return self.name
 
-
 class Curriculum(models.Model):
     id = models.CharField(max_length=100, primary_key=True, unique=True, editable=False)
     grade = models.CharField(max_length=10, choices=GRADE)
-    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
+    subject = models.ForeignKey(Subject, related_name="curriculums", on_delete=models.CASCADE)
 
     def save(self, *args, **kwargs):
-        self.id = f"{self.grade}-{self.subject.name}".lower().replace(" ", "-")
+        self.id = f"{self.grade}-{self.subject.name}".lower().replace(" ", "-").replace("|", "_")
         super().save(*args, **kwargs)
 
     @property
@@ -34,64 +33,42 @@ class Curriculum(models.Model):
 
 
 class Strand(models.Model):
-    id = models.CharField(max_length=100, unique=True, primary_key=True, editable=False)
     number = models.PositiveSmallIntegerField()
-    curriculum = models.ForeignKey(
-        Curriculum, related_name="strands", on_delete=models.CASCADE
-    )
     name = models.CharField(max_length=225)
 
-    def save(self, *args, **kwargs):
-        self.id = f"{self.curriculum.id}.{self.number}"
-        super().save(*args, **kwargs)
-
     def __str__(self):
-        return f"{self.curriculum.id} {self.name}"
+        return self.name.lower()
 
 
 class Substrand(models.Model):
-    id = models.CharField(max_length=100, unique=True, primary_key=True, editable=False)
+    id = models.CharField(editable=False, max_length=20, primary_key=True)
     number = models.PositiveSmallIntegerField()
-    strand = models.ForeignKey(
-        Strand, related_name="substrands", on_delete=models.CASCADE
-    )
     name = models.CharField(max_length=100)
+    subject = models.ForeignKey(Subject, related_name="substrands", on_delete=models.CASCADE)
+    strand = models.ForeignKey(Strand, related_name="substrands", on_delete=models.CASCADE)
+    curriculum = models.ManyToManyField(Curriculum, related_name="substrands")
+
 
     def save(self, *args, **kwargs):
-        self.id = f"{self.strand.id}.{self.number}"
+        subject_id = self.subject.id
+        curriculum_grades = "-".join([curriculum.grade for curriculum in self.curriculum])
+        self.id = f"S{subject_id}_{curriculum_grades}.{self.strand.number}.{self.number}"
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"{self.strand.id} {self.name}"
+        return self.name
 
 
 class Lesson(models.Model):
-    subject = models.ForeignKey(Subject, on_delete=models.CASCADE, editable=False)
-    grade = models.CharField(max_length=10, choices=GRADE, editable=False)
-    strand = models.ForeignKey(
-        Strand, related_name="strands", on_delete=models.CASCADE, editable=False
-    )
-    substrand = models.ForeignKey(
-        Substrand, related_name="lessons", on_delete=models.CASCADE
-    )
+    id = models.CharField(editable=False, max_length=20, primary_key=True)
+    # subject = models.ForeignKey(Subject, on_delete=models.CASCADE, editable=False)
+    grade = models.CharField(max_length=10, choices=GRADE)
+    # strand = models.ForeignKey(Strand, related_name="strands", on_delete=models.CASCADE, editable=False)
+    substrand = models.ForeignKey(Substrand, related_name="lessons", on_delete=models.CASCADE)
     number = models.PositiveSmallIntegerField()
     topic = models.CharField(max_length=1024)
     content = models.TextField()
     slug = models.SlugField(unique=True, editable=False)
-
-    @property
-    def url(self):
-        """
-        Read-only property that returns the URL for
-        the detail view of the lesson instance.
-        """
-        return reverse(
-            "api:curriculums-lesson",
-            kwargs={
-                "curriculum": self.strand.curriculum.id,
-                "lesson": self.slug,
-            },
-        )
 
     def __str__(self):
         return f"{self.substrand.id} {self.topic}"
@@ -102,12 +79,11 @@ class Lesson(models.Model):
         grade, strand, and slug fields based on related SubStrand,
         and then save the instance to the database.
         """
-        self.strand = self.substrand.strand
-        self.grade = self.strand.curriculum.grade
-        self.subject = self.strand.curriculum.subject
-        self.slug = slugify(
-            f"{self.strand.number}-{self.substrand.number}-{self.number}-{self.topic}"
-        )
+        strand_number = self.substrand.strand.number
+        self.id = f"{self.grade}.{strand_number}.{self.substrand.number}"
+        self.id = f"{self.substrand.id}.{self.number}"
+        self.subject = self.strand.curriculum.objects.first().subject
+        self.slug = slugify(f"{self.strand.number}-{self.substrand.number}-{self.number}-{self.topic}")
         super().save(*args, **kwargs)
 
     class Meta:

@@ -2,13 +2,14 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
 from .models import CustomUser, UserSchool, PasswordResetRequest
+from chat.models import ChatMessage
 
 
 class UserSchoolInline(admin.StackedInline):
     model = UserSchool
     extra = 1
 
-admin.site.register(PasswordResetRequest)
+# admin.site.register(PasswordResetRequest)
 
 @admin.register(CustomUser)
 class CustomUserAdmin(UserAdmin):
@@ -83,3 +84,5 @@ class CustomUserAdmin(UserAdmin):
     def name(self, user):
         """Return the user full name"""
         return user.get_full_name()
+
+admin.site.register(ChatMessage)

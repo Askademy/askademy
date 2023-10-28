@@ -15,16 +15,16 @@ class SubstrandInline(admin.StackedInline):
 @admin.register(Subject)
 class SubjectAdmin(admin.ModelAdmin):
     inlines = [CurriculumInline]
-    list_display = ["name", "curriculums"]
+    list_display = ["name", "grade"]
 
     @admin.display()
-    def curriculums(self, obj):
+    def grade(self, obj):
         return [x.grade for x in obj.curriculums.all()]
 
 
 @admin.register(Strand)
 class StrandAdmin(admin.ModelAdmin):
-    list_display = ["name", "curriculum"]
+    list_display = ["name",]
     search_fields = ["name"]
     inlines = [SubstrandInline]
 

@@ -7,23 +7,23 @@
     <div class="col-lg-3 border-right">
         <nav class="nav flex-column">
             {% for strand in strands %}
-            <a class="nav-link" data-toggle="collapse" href="#strand-{{ forloop.counter }}" role="button"
-                aria-expanded="false" aria-controls="strand-{{ forloop.counter }}">
+            <a class="nav-link" data-toggle="collapse" href="#strand-{{ strand.id }}" role="button"
+                aria-expanded="false" aria-controls="strand-{{ strand.id }}">
                 {{ strand.name }}
             </a>
-            <div class="collapse" id="strand-{{ forloop.counter }}">
+            <div class="collapse" id="strand-{{ strand.id }}">
                 {% for substrand in strand.substrands %}
                 <a class="nav-link ml-2" data-toggle="collapse"
-                    href="#substrand-{{ forloop.parentloop.counter }}{{ forloop.counter }}" role="button"
+                    href="#substrand-{{ substrand.id }}" role="button"
                     aria-expanded="false"
-                    aria-controls="substrand-{{ forloop.parentloop.counter }}{{ forloop.counter }}">
+                    aria-controls="substrand-{{ substrand.id }}">
                     {{ substrand.name }}
                 </a>
-                <div class="collapse" id="substrand-{{ forloop.parentloop.counter }}{{ forloop.counter }}">
-                    {% for topic in substrand.topics %}
-                    <a class="nav-link ml-4" href="#"
-                        onclick="loadTopic('{{ topic.content|escapejs }}', '{{ topic.name|escapejs }}')">
-                        {{ topic.name }}
+                <div class="collapse" id="substrand-{{ substrand.id }}">
+                    {% for lesson in substrand.lessons %}
+                    <a class="nav-link ml-4" href="#" id="lesson-{{lesson.id}}"
+                        onclick="loadlesson('{{ lesson.topic|escapejs }}', '{{ lesson.content|escapejs }}', `{{lesson.id|escapejs}}`)">
+                        {{ lesson.topic }}
                     </a>
                     {% endfor %}
                 </div>
@@ -33,16 +33,25 @@
         </nav>
     </div>
     <div class="col-lg-9">
-        <h2 id="topic-name">Select a topic to display content</h2>
-        <div id="topic-content"></div>
+        <h2 id="lesson-topic">Select a topic to display content</h2>
+        <div id="lesson-content"></div>
     </div>
 </div>
 
 <script>
-    function loadTopic(content, name) {
-        document.getElementById('topic-name').innerHTML = name;
-        document.getElementById('topic-content').innerHTML = content;
+
+    function loadlesson(topic, content, lessonID) {
+        document.getElementById('lesson-topic').innerHTML = topic;
+        document.getElementById('lesson-content').innerHTML = content;
+
+        lessons = document.querySelectorAll('[id^="lesson-"]');
+        lessons.forEach(function(element){
+            element.style.color = "#0056b3"
+        })
+
+        document.getElementById(`lesson-${lessonID}`).style.color = "green"
         return false; // prevent default link behavior
     }
 </script>
+
 {% endblock %}

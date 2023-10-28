@@ -1,4 +1,6 @@
+from django.urls import reverse
 from rest_framework import serializers
+import re
 
 from records.curriculums.models import (
     Curriculum,
@@ -14,20 +16,26 @@ class LessonSerializer(serializers.ModelSerializer):
     substrand = serializers.CharField(source="substrand.name")
     url = serializers.SerializerMethodField()
 
+    def __init__(self, *args, **kwargs):
+        fields = kwargs.pop('fields', None)
+        super().__init__(*args, **kwargs)
+
+        if fields is not None:
+            # Update fields based on the provided list
+            allowed = set(fields)
+            existing = set(self.fields)
+            for field_name in existing - allowed:
+                self.fields.pop(field_name)
+
     def get_url(self, instance):
         abs_url = self.context["request"].build_absolute_uri
-        return abs_url(instance.url)
-
-    def get_fields(self):
-        fields = super().get_fields()
-        action = self.context["view"].action
-        view_obj = self.context["view"].get_queryset().first()
-        if not isinstance(view_obj, Lesson):
-            new_fields = {}
-            new_fields["topic"] = fields.pop("topic")
-            new_fields["url"] = fields.pop("url")
-            fields = new_fields
-        return fields
+        pattern = r"b\d+(-\w+)+"
+        for text in abs_url().split("/"):
+            match = re.search(pattern, text)
+            if match:
+                break
+        curriculum = match.group()
+        return abs_url(reverse("api:curriculums-lesson", args=[curriculum, instance.slug]))
 
     class Meta:
         model = Lesson
@@ -44,7 +52,7 @@ class LessonSerializer(serializers.ModelSerializer):
 
 
 class SubstrandSerializer(serializers.ModelSerializer):
-    lessons = LessonSerializer(many=True)
+    lessons = LessonSerializer(many=True, fields=["topic", "url"])
 
     class Meta:
         model = Substrand

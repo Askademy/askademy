@@ -33,7 +33,7 @@ class CurriculumViewSet(viewsets.ModelViewSet):
         "lesson_questions": QuestionSerializer,
     }
     lookup_url_kwarg = "curriculum"
-    lookup_value_regex = "b\d+-\w+"
+    lookup_value_regex = "b\d+(-\w+)+"
     filter_backends = [DynamicFilterBackend]
     filterset_classes = {
         "list": CurriculumFilter,
@@ -51,7 +51,7 @@ class CurriculumViewSet(viewsets.ModelViewSet):
         return serializer
 
     def retrieve(self, *args, **kwargs):
-        queryset = Strand.objects.filter(curriculum_id=kwargs["curriculum"])
+        queryset = Strand.objects.filter(substrands__curriculum__id=kwargs["curriculum"]).distinct()
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
 

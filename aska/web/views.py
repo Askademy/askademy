@@ -4,8 +4,7 @@ from django.urls import reverse_lazy
 from django.views.generic import TemplateView
 from django.views import generic
 
-from records.users.forms import UpdateUserForm
-from records.users.models import CustomUser
+
 from records.feeds.models import Post
 
 from . import dummy
@@ -18,6 +17,22 @@ class HomePageView(TemplateView):
         context = super().get_context_data(**kwargs)
         context["posts"] = Post.objects.all()
         return context
+
+
+class PostCreateView(generic.CreateView):
+    template_name = "posts/create_post.html"
+    model = Post
+    fields = ("content", "image", )
+    success_url = reverse_lazy('web:home') 
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+    
+
+class PostDetailView(generic.DetailView):
+    template_name = "posts/post_detail.html"
+    queryset = Post.objects.all()
 
 
 def about_view(request):
@@ -58,11 +73,4 @@ def search_results(request):
     return render(request, "web/search_results.html", context)
 
 
-class UpdateUserProfileView(generic.UpdateView):
-    model = CustomUser
-    form_class = UpdateUserForm
-    template_name = "auth/user_update.html"
-    success_url = reverse_lazy("web:update-user-profile")
 
-    def get_object(self, *args, **kwargs):
-        return self.request.user

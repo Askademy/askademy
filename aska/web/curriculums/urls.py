@@ -1,8 +1,8 @@
-from django.urls import path, include
+from django.urls import path, re_path, include
 
 from .views import CurriculumsView, LessonView
 
 urlpatterns = [
     path("", CurriculumsView.as_view(), name="curriculums"),
-    path("<str:curriculum>/", LessonView.as_view(), name="lesson")
+    re_path(r"^(?P<curriculum>b\d+(-\w+)+)/$", LessonView.as_view(), name="lesson"),
 ]

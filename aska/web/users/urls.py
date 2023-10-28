@@ -7,6 +7,7 @@ from .views import (
     login_view,
     logout_view,
     UserProfileView,
+    UpdateUserProfileView
 )
 
 account_paths = [
@@ -23,5 +24,6 @@ account_paths = [
 
 urlpatterns = [
     path("<int:pk>/", UserProfileView.as_view(), name="user-profile"),
+    path("profile/update/", UpdateUserProfileView.as_view(), name="update-user-profile"),
     path("account/", include(account_paths)),
 ]
