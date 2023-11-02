@@ -14,12 +14,12 @@ from records.curriculums.serializers import (
     StrandSerializer,
     LessonSerializer,
 )
-from .filters import (
-    DynamicFilterBackend,
-    LessonFilter,
-    CurriculumFilter,
-    QuestionFilter,
-)
+# from .filters import (
+#     DynamicFilterBackend,
+#     LessonFilter,
+#     CurriculumFilter,
+#     QuestionFilter,
+# )
 
 
 class CurriculumViewSet(viewsets.ModelViewSet):
@@ -33,13 +33,13 @@ class CurriculumViewSet(viewsets.ModelViewSet):
         "lesson_questions": QuestionSerializer,
     }
     lookup_url_kwarg = "curriculum"
-    lookup_value_regex = "b\d+(-\w+)+"
-    filter_backends = [DynamicFilterBackend]
-    filterset_classes = {
-        "list": CurriculumFilter,
-        "lessons": LessonFilter,
-        "lesson_questions": QuestionFilter,
-    }
+    lookup_value_regex = "\w+:\w+\d+"
+    # filter_backends = [DynamicFilterBackend]
+    # filterset_classes = {
+    #     "list": CurriculumFilter,
+    #     "lessons": LessonFilter,
+    #     "lesson_questions": QuestionFilter,
+    # }
 
     def get_serializer_class(self):
         if self.serializer_class:
@@ -51,7 +51,8 @@ class CurriculumViewSet(viewsets.ModelViewSet):
         return serializer
 
     def retrieve(self, *args, **kwargs):
-        queryset = Strand.objects.filter(substrands__curriculum__id=kwargs["curriculum"]).distinct()
+        curriculum = get_object_or_404(Curriculum, annotation__iexact=kwargs["curriculum"])
+        queryset = curriculum.strands.all()
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
 

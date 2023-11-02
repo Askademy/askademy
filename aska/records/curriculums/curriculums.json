@@ -1,853 +1,750 @@
 {
-  "grades": ["B4", "B5", "B6"],
+  "grades": [
+    { "id": 1, "code": "B4", "name": "BASIC 4" },
+    { "id": 2, "code": "B5", "name": "BASIC 5" },
+    { "id": 3, "code": "B6", "name": "BASIC 6" }
+  ],
   "subjects": [
-    { "id": 1, "name": "English" },
-    { "id": 2, "name": "Mathematics" },
-    { "id": 3, "name": "Science" },
-    { "id": 4, "name": "History" },
-    { "id": 5, "name": "Computing" },
-    { "id": 6, "name": "Creative Arts" },
-    { "id": 7, "name": "Our World Our People" },
-    { "id": 8, "name": "Religious and Moral Education" },
-    { "id": 9, "name": "Physical Education" },
-    { "id": 10, "name": "Ghanaian Language | Akan" }
+    { "id": 1, "name": "English", "code": "ENG" },
+    { "id": 2, "name": "Mathematics", "code": "MATH" },
+    { "id": 3, "name": "Science", "code": "SCI" },
+    { "id": 4, "name": "History", "code": "HIS" },
+    { "id": 5, "name": "Computing", "code": "COM" },
+    { "id": 6, "name": "Creative Arts", "code": "CAE" },
+    { "id": 7, "name": "Our World Our People", "code": "OWOP" },
+    { "id": 8, "name": "Religious and Moral Education", "code": "RME" },
+    { "id": 9, "name": "Physical Education", "code": "PE" },
+    { "id": 10, "name": "Ghanaian Language | Akan", "code": "GHL" }
   ],
   "curriculums": [
-    {
-      "id": "b4-english",
-      "grade": "B4",
-      "subject": { "id": 1, "name": "English" }
-    },
-    {
-      "id": "b4-mathematics",
-      "grade": "B4",
-      "subject": { "id": 2, "name": "Mathematics" }
-    },
-    {
-      "id": "b4-science",
-      "grade": "B4",
-      "subject": { "id": 3, "name": "Science" }
-    },
-    {
-      "id": "b4-history",
-      "grade": "B4",
-      "subject": { "id": 4, "name": "History" }
-    },
-    {
-      "id": "b4-computing",
-      "grade": "B4",
-      "subject": { "id": 5, "name": "Computing" }
-    },
-    {
-      "id": "b4-creative-arts",
-      "grade": "B4",
-      "subject": { "id": 6, "name": "Creative Arts" }
-    },
-    {
-      "id": "b4-our-world-our-people",
-      "grade": "B4",
-      "subject": { "id": 7, "name": "Our World Our People" }
-    },
-    {
-      "id": "b4-religious-and-moral-education",
-      "grade": "B4",
-      "subject": { "id": 8, "name": "Religious and Moral Education" }
-    },
-    {
-      "id": "b4-physical-education",
-      "grade": "B4",
-      "subject": { "id": 9, "name": "Physical Education" }
-    },
-    {
-      "id": "b4-ghanaian-language-_-akan",
-      "grade": "B4",
-      "subject": { "id": 10, "name": "Ghanaian Language | Akan" }
-    },
+    { "id": 1, "grade": "B4", "subject": "ENG", "annotation": "ENG:B4" },
+    { "id": 2, "grade": "B4", "subject": "MATH", "annotation": "MATH:B4" },
+    { "id": 3, "grade": "B4", "subject": "SCI", "annotation": "SCI:B4" },
+    { "id": 4, "grade": "B4", "subject": "HIS", "annotation": "HIS:B4" },
+    { "id": 5, "grade": "B4", "subject": "COM", "annotation": "COM:B4" },
+    { "id": 6, "grade": "B4", "subject": "CAE", "annotation": "CAE:B4" },
+    { "id": 7, "grade": "B4", "subject": "OWOP", "annotation": "OWOP:B4" },
+    { "id": 8, "grade": "B4", "subject": "RME", "annotation": "RME:B4" },
+    { "id": 9, "grade": "B4", "subject": "PE", "annotation": "PE:B4" },
+    { "id": 10, "grade": "B4", "subject": "GHL", "annotation": "GHL:B4" },
 
-    {
-      "id": "b5-english",
-      "grade": "B5",
-      "subject": { "id": 1, "name": "English" }
-    },
-    {
-      "id": "b5-mathematics",
-      "grade": "B5",
-      "subject": { "id": 2, "name": "Mathematics" }
-    },
-    {
-      "id": "b5-science",
-      "grade": "B5",
-      "subject": { "id": 3, "name": "Science" }
-    },
-    {
-      "id": "b5-history",
-      "grade": "B5",
-      "subject": { "id": 4, "name": "History" }
-    },
-    {
-      "id": "b5-computing",
-      "grade": "B5",
-      "subject": { "id": 5, "name": "Computing" }
-    },
-    {
-      "id": "b5-creative-arts",
-      "grade": "B5",
-      "subject": { "id": 6, "name": "Creative Arts" }
-    },
-    {
-      "id": "b5-our-world-our-people",
-      "grade": "B5",
-      "subject": { "id": 7, "name": "Our World Our People" }
-    },
-    {
-      "id": "b5-religious-and-moral-education",
-      "grade": "B5",
-      "subject": { "id": 8, "name": "Religious and Moral Education" }
-    },
-    {
-      "id": "b5-physical-education",
-      "grade": "B5",
-      "subject": { "id": 9, "name": "Physical Education" }
-    },
-    {
-      "id": "b5-ghanaian-language-_-akan",
-      "grade": "B5",
-      "subject": { "id": 10, "name": "Ghanaian Language | Akan" }
-    },
+    { "id": 11, "grade": "B5", "subject": "ENG", "annotation": "ENG:B5" },
+    { "id": 12, "grade": "B5", "subject": "MATH", "annotation": "MATH:B5" },
+    { "id": 13, "grade": "B5", "subject": "SCI", "annotation": "SCI:B5" },
+    { "id": 14, "grade": "B5", "subject": "HIS", "annotation": "HIS:B5" },
+    { "id": 15, "grade": "B5", "subject": "COM", "annotation": "COM:B5" },
+    { "id": 16, "grade": "B5", "subject": "CAE", "annotation": "CAE:B5" },
+    { "id": 17, "grade": "B5", "subject": "OWOP", "annotation": "OWOP:B5" },
+    { "id": 18, "grade": "B5", "subject": "RME", "annotation": "RME:B5" },
+    { "id": 19, "grade": "B5", "subject": "PE", "annotation": "PE:B5" },
+    { "id": 20, "grade": "B5", "subject": "GHL", "annotation": "GHL:B5" },
 
-    {
-      "id": "b6-english",
-      "grade": "B6",
-      "subject": { "id": 1, "name": "English" }
-    },
-    {
-      "id": "b6-mathematics",
-      "grade": "B6",
-      "subject": { "id": 2, "name": "Mathematics" }
-    },
-    {
-      "id": "b6-science",
-      "grade": "B6",
-      "subject": { "id": 3, "name": "Science" }
-    },
-    {
-      "id": "b6-history",
-      "grade": "B6",
-      "subject": { "id": 4, "name": "History" }
-    },
-    {
-      "id": "b6-computing",
-      "grade": "B6",
-      "subject": { "id": 5, "name": "Computing" }
-    },
-    {
-      "id": "b6-creative-arts",
-      "grade": "B6",
-      "subject": { "id": 6, "name": "Creative Arts" }
-    },
-    {
-      "id": "b6-our-world-our-people",
-      "grade": "B6",
-      "subject": { "id": 7, "name": "Our World Our People" }
-    },
-    {
-      "id": "b6-religious-and-moral-education",
-      "grade": "B6",
-      "subject": { "id": 8, "name": "Religious and Moral Education" }
-    },
-    {
-      "id": "b6-physical-education",
-      "grade": "B6",
-      "subject": { "id": 9, "name": "Physical Education" }
-    },
-    {
-      "id": "b6-ghanaian-language-_-akan",
-      "grade": "B6",
-      "subject": { "id": 10, "name": "Ghanaian Language | Akan" }
-    }
+    { "id": 21, "grade": "B6", "subject": "ENG", "annotation": "ENG:B6" },
+    { "id": 22, "grade": "B6", "subject": "MATH", "annotation": "MATH:B6" },
+    { "id": 23, "grade": "B6", "subject": "SCI", "annotation": "SCI:B6" },
+    { "id": 24, "grade": "B6", "subject": "HIS", "annotation": "HIS:B6" },
+    { "id": 25, "grade": "B6", "subject": "COM", "annotation": "COM:B6" },
+    { "id": 26, "grade": "B6", "subject": "CAE", "annotation": "CAE:B6" },
+    { "id": 27, "grade": "B6", "subject": "OWOP", "annotation": "OWOP:B6" },
+    { "id": 28, "grade": "B6", "subject": "RME", "annotation": "RME:B6" },
+    { "id": 29, "grade": "B6", "subject": "PE", "annotation": "PE:B6" },
+    { "id": 30, "grade": "B6", "subject": "GHL", "annotation": "GHL:B6" }
   ],
   "strands": [
     {
+      "annotation": "SCI:1",
       "number": 1,
       "name": "DIVERSITY OF MATTER",
+      "curriculums": ["SCI:B4", "SCI:B5", "SCI:B6"],
       "substrands": [
         {
-          "id": "1.1",
+          "annotation": "SCI:1.1",
+          "number": 1,
           "name": "Living and Non-Living Things",
-          "lessons": [],
-          "curriculum": ["b4-science", "b5-science", "b6-science"]
+          "curriculums": ["SCI:B4", "SCI:B5", "SCI:B6"]
         },
         {
-          "id": "1.2",
+          "annotation": "SCI:1.2",
+          "number": 2,
           "name": "Materials",
-          "lessons": [],
-          "curriculum": ["b4-science", "b5-science", "b6-science"]
+          "curriculums": ["SCI:B4", "SCI:B5", "SCI:B6"]
         }
       ]
     },
     {
+      "annotation": "SCI:2",
       "number": 2,
       "name": "CYCLES",
+      "curriculums": ["SCI:B4", "SCI:B5", "SCI:B6"],
       "substrands": [
         {
-          "id": "2.1",
+          "annotation": "SCI:2.1",
+          "number": 1,
           "name": "Earth Science",
-          "lessons": [],
-          "curriculum": ["b4-science", "b5-science", "b6-science"]
+          "curriculums": ["SCI:B4", "SCI:B5", "SCI:B6"]
         },
         {
-          "id": "2.2",
+          "annotation": "SCI:2.2",
+          "number": 2,
           "name": "Life Cycles of Organisms",
-          "lessons": [],
-          "curriculum": ["b4-science", "b5-science", "b6-science"]
+          "curriculums": ["SCI:B4", "SCI:B5", "SCI:B6"]
         }
       ]
     },
     {
+      "annotation": "SCI:3",
       "number": 3,
       "name": "SYSTEMS",
+      "curriculums": ["SCI:B4", "SCI:B5", "SCI:B6"],
       "substrands": [
         {
-          "id": "3.1",
+          "annotation": "SCI:3.1",
+          "number": 1,
           "name": "The Human Body Systems",
-          "lessons": [],
-          "curriculum": ["b4-science", "b5-science", "b6-science"]
+          "curriculums": ["SCI:B4", "SCI:B5", "SCI:B6"]
         },
         {
-          "id": "3.2",
+          "annotation": "SCI:3.2",
+          "number": 2,
           "name": "The Solar System",
-          "lessons": [],
-          "curriculum": ["b4-science", "b5-science", "b6-science"]
+          "curriculums": ["SCI:B4", "SCI:B5", "SCI:B6"]
         },
         {
-          "id": "3.3",
+          "annotation": "SCI:3.3",
+          "number": 3,
           "name": "Ecosystems",
-          "lessons": [],
-          "curriculum": ["b4-science", "b5-science", "b6-science"]
+          "curriculums": ["SCI:B4", "SCI:B5", "SCI:B6"]
         }
       ]
     },
     {
+      "annotation": "SCI:4",
       "number": 4,
       "name": "FORCES AND ENERGY",
+      "curriculums": ["SCI:B4", "SCI:B5", "SCI:B6"],
       "substrands": [
         {
-          "id": "4.1",
+          "annotation": "SCI:4.1",
+          "number": 1,
           "name": "Sources and Forms of Energy",
-          "lessons": [],
-          "curriculum": ["b4-science", "b5-science", "b6-science"]
+          "curriculums": ["SCI:B4", "SCI:B5", "SCI:B6"]
         },
         {
-          "id": "4.2",
+          "annotation": "SCI:4.2",
+          "number": 2,
           "name": "Electricity and Electronics",
-          "lessons": [],
-          "curriculum": ["b4-science", "b5-science", "b6-science"]
+          "curriculums": ["SCI:B4", "SCI:B5", "SCI:B6"]
         },
         {
-          "id": "4.3",
+          "annotation": "SCI:4.3",
+          "number": 3,
           "name": "Forces and Movement",
-          "lessons": [],
-          "curriculum": ["b4-science", "b5-science", "b6-science"]
+          "curriculums": ["SCI:B4", "SCI:B5", "SCI:B6"]
         }
       ]
     },
     {
+      "annotation": "SCI:5",
       "number": 5,
       "name": "HUMANS AND THE ENVIRONMENT",
+      "curriculums": ["SCI:B4", "SCI:B5", "SCI:B6"],
       "substrands": [
         {
-          "id": "5.1",
+          "annotation": "SCI:5.1",
+          "number": 1,
           "name": "Personal Hygiene and Sanitation",
-          "lessons": [],
-          "curriculum": ["b4-science", "b5-science", "b6-science"]
+          "curriculums": ["SCI:B4", "SCI:B5", "SCI:B6"]
         },
         {
-          "id": "5.2",
+          "annotation": "SCI:5.2",
+          "number": 2,
           "name": "Diseases",
-          "lessons": [],
-          "curriculum": ["b4-science", "b5-science", "b6-science"]
+          "curriculums": ["SCI:B4", "SCI:B5", "SCI:B6"]
         },
         {
-          "id": "5.3",
+          "annotation": "SCI:5.3",
+          "number": 3,
           "name": "Science and Industry",
-          "lessons": [],
-          "curriculum": ["b4-science", "b5-science", "b6-science"]
+          "curriculums": ["SCI:B4", "SCI:B5", "SCI:B6"]
         },
         {
-          "id": "5.4",
+          "annotation": "SCI:5.4",
+          "number": 4,
           "name": "Climate Change",
-          "lessons": [],
-          "curriculum": ["b4-science", "b5-science", "b6-science"]
+          "curriculums": ["SCI:B4", "SCI:B5", "SCI:B6"]
         }
       ]
     },
+
     {
+      "annotation": "COM:1",
       "number": 1,
-      "name": "Introduction to Computing",
+      "name": "INTRODUCTION TO COMPUTING",
+      "curriculums": ["COM:B4", "COM:B5", "COM:B6"],
       "substrands": [
         {
-          "id": "1.1",
-          "name": "Generation of computers and parts of a computer and other gadgets. (Identify Parts of a Computer and Technology Tools)",
-          "lessons": [],
-          "curriculum": ["b4-computing", "b5-computing", "b6-computing"]
+          "annotation": "COM:1.1",
+          "number": 1,
+          "name": "Generation of Computers and Parts of a Computer and Other Gadgets. (Identify Parts of a Computer and Technology Tools)",
+          "curriculums": ["COM:B4", "COM:B5", "COM:B6"]
         },
         {
-          "id": "1.2",
-          "name": "Introduction to MS-Windows Interface (Desktop Background and locations of the computer.)",
-          "lessons": [],
-          "curriculum": ["b4-computing", "b5-computing", "b6-computing"]
+          "annotation": "COM:1.2",
+          "number": 2,
+          "name": "Introduction to MS-Windows Interface (Desktop Background and Locations of the Computer.)",
+          "curriculums": ["COM:B4", "COM:B5", "COM:B6"]
         },
         {
-          "id": "1.3",
-          "name": "Data, sources, and usage",
-          "lessons": [],
-          "curriculum": ["b4-computing", "b5-computing", "b6-computing"]
+          "annotation": "COM:1.3",
+          "number": 3,
+          "name": "Data, Sources, and Usage",
+          "curriculums": ["COM:B4", "COM:B5", "COM:B6"]
         },
         {
-          "id": "1.4",
-          "name": "Technology in the community (communication)",
-          "lessons": [],
-          "curriculum": ["b4-computing", "b5-computing", "b6-computing"]
+          "annotation": "COM:1.4",
+          "number": 4,
+          "name": "Technology in the Community (Communication)",
+          "curriculums": ["COM:B4", "COM:B5", "COM:B6"]
         }
       ]
     },
     {
+      "annotation": "COM:2",
       "number": 2,
-      "name": "Presentation",
+      "name": "PRESENTATION",
+      "curriculums": ["COM:B4", "COM:B5", "COM:B6"],
       "substrands": [
         {
-          "id": "2.1",
+          "annotation": "COM:2.1",
+          "number": 1,
           "name": "Introduction to MS-PowerPoint",
-          "lessons": [],
-          "curriculum": ["b4-computing", "b5-computing", "b6-computing"]
+          "curriculums": ["COM:B4", "COM:B5", "COM:B6"]
         },
         {
-          "id": "2.2",
-          "name": "Tabs and ribbons of MS-PowerPoint",
-          "lessons": [],
-          "curriculum": ["b4-computing", "b5-computing", "b6-computing"]
+          "annotation": "COM:2.2",
+          "number": 2,
+          "name": "Tabs and Ribbons of MS-PowerPoint",
+          "curriculums": ["COM:B4", "COM:B5", "COM:B6"]
         }
       ]
     },
     {
+      "annotation": "COM:3",
       "number": 3,
-      "name": "Word Processing",
+      "name": "WORD PROCESSING",
+      "curriculums": ["COM:B4", "COM:B5", "COM:B6"],
       "substrands": [
         {
-          "id": "3.1",
+          "annotation": "COM:3.1",
+          "number": 1,
           "name": "Introduction to Word Processing",
-          "lessons": [],
-          "curriculum": ["b4-computing", "b5-computing", "b6-computing"]
+          "curriculums": ["COM:B4", "COM:B5", "COM:B6"]
         },
         {
-          "id": "3.2",
-          "name": "Tabs and ribbons of word processing",
-          "lessons": [],
-          "curriculum": ["b4-computing", "b5-computing", "b6-computing"]
+          "annotation": "COM:3.2",
+          "number": 2,
+          "name": "Tabs and Ribbons of Word Processing",
+          "curriculums": ["COM:B4", "COM:B5", "COM:B6"]
         }
       ]
     },
     {
+      "annotation": "COM:4",
       "number": 4,
-      "name": "Desktop Publishing",
+      "name": "DESKTOP PUBLISHING",
+      "curriculums": ["COM:B4", "COM:B5", "COM:B6"],
       "substrands": [
         {
-          "id": "4.1",
+          "annotation": "COM:4.1",
+          "number": 1,
           "name": "Introduction to MS-Publisher",
-          "lessons": [],
-          "curriculum": ["b4-computing", "b5-computing", "b6-computing"]
+          "curriculums": ["COM:B4", "COM:B5", "COM:B6"]
         }
       ]
     },
     {
+      "annotation": "COM:5",
       "number": 5,
-      "name": "Programming and Databases",
+      "name": "PROGRAMMING AND DATABASES",
+      "curriculums": ["COM:B4", "COM:B5", "COM:B6"],
       "substrands": [
         {
-          "id": "5.1",
-          "name": "Introduction to databases, algorithm, and programming.",
-          "lessons": [],
-          "curriculum": ["b4-computing", "b5-computing", "b6-computing"]
+          "annotation": "COM:5.1",
+          "number": 1,
+          "name": "Introduction to Databases, Algorithm, and Programming.",
+          "curriculums": ["COM:B4", "COM:B5", "COM:B6"]
         },
         {
-          "id": "5.2",
-          "name": "Introduction to programming languages (e.g., MS-Excel, Scratch, VB dot Net, etc.)",
-          "lessons": [],
-          "curriculum": ["b4-computing", "b5-computing", "b6-computing"]
+          "annotation": "COM:5.2",
+          "number": 2,
+          "name": "Introduction to Programming Languages (e.g., MS-Excel, Scratch, VB dot Net, etc.)",
+          "curriculums": ["COM:B4", "COM:B5", "COM:B6"]
         },
         {
-          "id": "5.3",
+          "annotation": "COM:5.3",
+          "number": 3,
           "name": "Introduction to Electronic Spreadsheet",
-          "lessons": [],
-          "curriculum": ["b4-computing", "b5-computing", "b6-computing"]
+          "curriculums": ["COM:B4", "COM:B5", "COM:B6"]
         },
         {
-          "id": "5.4",
-          "name": "Tabs and ribbons manipulation",
-          "lessons": [],
-          "curriculum": ["b4-computing", "b5-computing", "b6-computing"]
+          "annotation": "COM:5.4",
+          "number": 4,
+          "name": "Tabs and Ribbons Manipulation",
+          "curriculums": ["COM:B4", "COM:B5", "COM:B6"]
         }
       ]
     },
     {
+      "annotation": "COM:6",
       "number": 6,
-      "name": "Internet and Social Media",
+      "name": "INTERNET AND SOCIAL MEDIA",
+      "curriculums": ["COM:B4", "COM:B5", "COM:B6"],
       "substrands": [
         {
-          "id": "6.1",
+          "annotation": "COM:6.1",
+          "number": 1,
           "name": "Network Overview",
-          "lessons": [],
-          "curriculum": ["b4-computing", "b5-computing", "b6-computing"]
+          "curriculums": ["COM:B4", "COM:B5", "COM:B6"]
         },
         {
-          "id": "6.2",
-          "name": "Web browsers and Web Pages",
-          "lessons": [],
-          "curriculum": ["b4-computing", "b5-computing", "b6-computing"]
+          "annotation": "COM:6.2",
+          "number": 2,
+          "name": "Web Browsers and Web Pages",
+          "curriculums": ["COM:B4", "COM:B5", "COM:B6"]
         },
         {
-          "id": "6.3",
+          "annotation": "COM:6.3",
+          "number": 3,
           "name": "Surfing the World Wide Web",
-          "lessons": [],
-          "curriculum": ["b4-computing", "b5-computing", "b6-computing"]
+          "curriculums": ["COM:B4", "COM:B5", "COM:B6"]
         },
         {
-          "id": "6.4",
-          "name": "Favorite places and Search engine",
-          "lessons": [],
-          "curriculum": ["b4-computing", "b5-computing", "b6-computing"]
+          "annotation": "COM:6.4",
+          "number": 4,
+          "name": "Favorite Places and Search Engine",
+          "curriculums": ["COM:B4", "COM:B5", "COM:B6"]
         },
         {
-          "id": "6.5",
+          "annotation": "COM:6.5",
+          "number": 5,
           "name": "Using Online Forms",
-          "lessons": [],
-          "curriculum": ["b4-computing", "b5-computing", "b6-computing"]
+          "curriculums": ["COM:B4", "COM:B5", "COM:B6"]
         },
         {
-          "id": "6.6",
-          "name": "Customizing your browser",
-          "lessons": [],
-          "curriculum": ["b4-computing", "b5-computing", "b6-computing"]
+          "annotation": "COM:6.6",
+          "number": 6,
+          "name": "Customizing Your Browser",
+          "curriculums": ["COM:B4", "COM:B5", "COM:B6"]
         },
         {
-          "id": "6.7",
+          "annotation": "COM:6.7",
+          "number": 7,
           "name": "Electronic Email",
-          "lessons": [],
-          "curriculum": ["b4-computing", "b5-computing", "b6-computing"]
+          "curriculums": ["COM:B4", "COM:B5", "COM:B6"]
         },
         {
-          "id": "6.8",
+          "annotation": "COM:6.8",
+          "number": 8,
           "name": "Internet of Things (IoT)",
-          "lessons": [],
-          "curriculum": ["b4-computing", "b5-computing", "b6-computing"]
+          "curriculums": ["COM:B4", "COM:B5", "COM:B6"]
         },
         {
-          "id": "6.9",
+          "annotation": "COM:6.9",
+          "number": 9,
           "name": "Digital Literacy",
-          "lessons": [],
-          "curriculum": ["b4-computing", "b5-computing", "b6-computing"]
+          "curriculums": ["COM:B4", "COM:B5", "COM:B6"]
         },
         {
-          "id": "6.10",
+          "annotation": "COM:6.10",
+          "number": 10,
           "name": "Network Etiquette",
-          "lessons": [],
-          "curriculum": ["b4-computing", "b5-computing", "b6-computing"]
+          "curriculums": ["COM:B4", "COM:B5", "COM:B6"]
         }
       ]
     },
     {
+      "annotation": "COM:7",
       "number": 7,
-      "name": "Health and Safety in Using ICT Tools",
+      "name": "HEALTH AND SAFETY IN USING ICT TOOLS",
+      "curriculums": ["COM:B4", "COM:B5", "COM:B6"],
       "substrands": [
         {
-          "id": "7.1",
-          "name": "Health and safety in using ICT tools",
-          "lessons": [],
-          "curriculum": ["b4-computing", "b5-computing", "b6-computing"]
+          "annotation": "COM:7.1",
+          "number": 1,
+          "name": "Health and Safety in Using ICT Tools",
+          "curriculums": ["COM:B4", "COM:B5", "COM:B6"]
         }
       ]
     },
     {
+      "annotation": "ENG:1",
       "number": 1,
-      "name": "Oral Language: Listening and Speaking",
+      "name": "ORAL LANGUAGE: LISTENING AND SPEAKING",
+      "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"],
       "substrands": [
         {
-          "id": "1.1",
+          "annotation": "ENG:1.1",
+          "number": 1,
           "name": "Songs",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
+          "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"]
         },
         {
-          "id": "1.2",
+          "annotation": "ENG:1.2",
+          "number": 2,
           "name": "Rhymes",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
+          "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"]
         },
         {
-          "id": "1.3",
+          "annotation": "ENG:1.3",
+          "number": 3,
           "name": "Poems",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
+          "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"]
         },
         {
-          "id": "1.4",
+          "annotation": "ENG:1.4",
+          "number": 4,
           "name": "Storytelling",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
+          "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"]
         },
         {
-          "id": "1.5",
+          "annotation": "ENG:1.5",
+          "number": 5,
           "name": "Dramatization & Role Play",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
+          "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"]
         },
         {
-          "id": "1.6",
+          "annotation": "ENG:1.6",
+          "number": 6,
           "name": "Conversation; Talking About Oneself, Family, People, Places, Customs, Events, Cultural Values, Manners, and Other Themes",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
+          "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"]
         },
         {
-          "id": "1.7",
+          "annotation": "ENG:1.7",
+          "number": 7,
           "name": "Listening Comprehension",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
+          "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"]
         },
         {
-          "id": "1.8",
+          "annotation": "ENG:1.8",
+          "number": 8,
           "name": "Asking and Answering Questions",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
+          "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"]
         },
         {
-          "id": "1.9",
+          "annotation": "ENG:1.9",
+          "number": 9,
           "name": "Giving and Following Commands/Instructions/Directions and Making and Responding to Requests",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
+          "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"]
         },
         {
-          "id": "1.10",
+          "annotation": "ENG:1.10",
+          "number": 10,
           "name": "Presentation",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
+          "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"]
         }
       ]
     },
     {
+      "annotation": "ENG:2",
       "number": 2,
-      "name": "Reading",
+      "name": "READING",
+      "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"],
       "substrands": [
         {
-          "id": "2.11",
+          "annotation": "ENG:2.11",
+          "number": 11,
           "name": "Pre-Reading Activities: Print Concept",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
+          "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"]
         },
         {
-          "id": "2.12",
+          "annotation": "ENG:2.12",
+          "number": 12,
           "name": "Phonological/Phonemic Awareness",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
+          "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"]
         },
         {
-          "id": "2.13",
+          "annotation": "ENG:2.13",
+          "number": 13,
           "name": "Phonics: Letter-Sound Knowledge - Vowel Sounds and Consonant Sounds",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
+          "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"]
         },
         {
-          "id": "2.14",
+          "annotation": "ENG:2.14",
+          "number": 14,
           "name": "Word Families, Rhyming Endings and Common Digraphs",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
+          "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"]
         },
         {
-          "id": "2.15",
+          "annotation": "ENG:2.15",
+          "number": 15,
           "name": "Diphthongs",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
+          "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"]
         },
         {
-          "id": "2.16",
+          "annotation": "ENG:2.16",
+          "number": 16,
           "name": "Blends and Consonant Clusters",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
+          "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"]
         },
         {
-          "id": "2.17",
+          "annotation": "ENG:2.17",
+          "number": 17,
           "name": "Vocabulary: Sight Vocabulary and Content Vocabulary",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
+          "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"]
         },
         {
-          "id": "2.18",
+          "annotation": "ENG:2.18",
+          "number": 18,
           "name": "Comprehension",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
+          "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"]
         },
         {
-          "id": "2.19",
+          "annotation": "ENG:2.19",
+          "number": 19,
           "name": "Silent Reading",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
+          "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"]
         },
         {
-          "id": "2.20",
+          "annotation": "ENG:2.20",
+          "number": 20,
           "name": "Fluency",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
+          "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"]
         },
         {
-          "id": "2.21",
+          "annotation": "ENG:2.21",
+          "number": 21,
           "name": "Summarizing",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
+          "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"]
         }
       ]
     },
     {
+      "annotation": "ENG:3",
       "number": 3,
-      "name": "Grammar Usage at Word and Phrase Levels",
+      "name": "GRAMMAR USAGE AT WORD AND PHRASE LEVELS",
+      "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"],
       "substrands": [
         {
-          "id": "3.22",
+          "annotation": "ENG:3.22",
+          "number": 22,
           "name": "Nouns",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
+          "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"]
         },
         {
-          "id": "3.23",
+          "annotation": "ENG:3.23",
+          "number": 23,
           "name": "Determiners",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
+          "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"]
         },
         {
-          "id": "3.24",
+          "annotation": "ENG:3.24",
+          "number": 24,
           "name": "Pronouns",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
+          "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"]
         },
         {
-          "id": "3.25",
+          "annotation": "ENG:3.25",
+          "number": 25,
           "name": "Adjectives",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
+          "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"]
         },
         {
-          "id": "3.26",
+          "annotation": "ENG:3.26",
+          "number": 26,
           "name": "Verbs",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
+          "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"]
         },
         {
-          "id": "3.27",
+          "annotation": "ENG:3.27",
+          "number": 27,
           "name": "Adverbs",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
+          "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"]
         },
         {
-          "id": "3.28",
+          "annotation": "ENG:3.28",
+          "number": 28,
           "name": "Idiomatic Expressions",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
+          "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"]
         },
         {
-          "id": "3.29",
+          "annotation": "ENG:3.29",
+          "number": 29,
           "name": "Conjunctions",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
+          "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"]
         },
         {
-          "id": "3.30",
+          "annotation": "ENG:3.30",
+          "number": 30,
           "name": "Modals",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
+          "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"]
         },
         {
-          "id": "3.31",
+          "annotation": "ENG:3.31",
+          "number": 31,
           "name": "Prepositions",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
+          "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"]
         },
         {
-          "id": "3.32",
+          "annotation": "ENG:3.32",
+          "number": 32,
           "name": "Adjective Phrase",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
+          "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"]
         }
       ]
     },
     {
+      "annotation": "ENG:4",
       "number": 4,
-      "name": "Writing",
+      "name": "WRITING",
+      "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"],
       "substrands": [
         {
-          "id": "4.33",
+          "annotation": "ENG:4.33",
+          "number": 33,
           "name": "Pre-Writing Activities",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
+          "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"]
         },
         {
-          "id": "4.34",
+          "annotation": "ENG:4.34",
+          "number": 34,
           "name": "Penmanship/Handwriting",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
+          "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"]
         },
         {
-          "id": "4.35",
+          "annotation": "ENG:4.35",
+          "number": 35,
           "name": "Writing/Copying Letters-Small and Capital Letters",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
+          "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"]
         },
         {
-          "id": "4.36",
+          "annotation": "ENG:4.36",
+          "number": 36,
           "name": "Labeling Items",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
+          "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"]
         },
         {
-          "id": "4.37",
+          "annotation": "ENG:4.37",
+          "number": 37,
           "name": "Writing Simple Words and Sentences",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
+          "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"]
         },
         {
-          "id": "4.38",
+          "annotation": "ENG:4.38",
+          "number": 38,
           "name": "Paragraph Development",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
+          "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"]
         },
         {
-          "id": "4.39",
+          "annotation": "ENG:4.39",
+          "number": 39,
           "name": "Controlled Writing",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
+          "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"]
         },
         {
-          "id": "4.40",
+          "annotation": "ENG:4.40",
+          "number": 40,
           "name": "Guided Composition",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
+          "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"]
         },
         {
-          "id": "4.41",
+          "annotation": "ENG:4.41",
+          "number": 41,
           "name": "Writing as a Process",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
+          "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"]
         },
         {
-          "id": "4.42",
+          "annotation": "ENG:4.42",
+          "number": 42,
           "name": "Narrative Writing",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
+          "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"]
         },
         {
-          "id": "4.43",
+          "annotation": "ENG:4.43",
+          "number": 43,
           "name": "Creative/Free Writing",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
+          "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"]
         },
         {
-          "id": "4.44",
+          "annotation": "ENG:4.44",
+          "number": 44,
           "name": "Descriptive Writing",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
+          "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"]
         },
         {
-          "id": "4.45",
+          "annotation": "ENG:4.45",
+          "number": 45,
           "name": "Persuasive/Argumentative Writing",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
+          "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"]
         },
         {
-          "id": "4.46",
+          "annotation": "ENG:4.46",
+          "number": 46,
           "name": "Informative/Academic Writing",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
+          "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"]
         },
         {
-          "id": "4.47",
+          "annotation": "ENG:4.47",
+          "number": 47,
           "name": "Letter Writing",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
+          "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"]
         }
       ]
     },
     {
+      "annotation": "ENG:5",
       "number": 5,
-      "name": "Using Writing Conventions/Grammar Usage",
+      "name": "USING WRITING CONVENTIONS/GRAMMAR USAGE",
+      "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"],
       "substrands": [
         {
-          "id": "5.48",
-          "name": "Using Capitalization",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
-        },
-        {
-          "id": "5.49",
-          "name": "Using Punctuation",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
-        },
-        {
-          "id": "5.50",
-          "name": "Using Naming Words",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
-        },
-        {
-          "id": "5.51",
-          "name": "Using Action Words/Verbs",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
-        },
-        {
-          "id": "5.52",
+          "annotation": "ENG:5.52",
+          "number": 52,
           "name": "Using Qualifying Words: Adjectives",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
+          "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"]
         },
         {
-          "id": "5.53",
+          "annotation": "ENG:5.53",
+          "number": 53,
           "name": "Using Qualifying Words: Adverbs",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
+          "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"]
         },
         {
-          "id": "5.54",
+          "annotation": "ENG:5.54",
+          "number": 54,
           "name": "Using Simple Prepositions",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
+          "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"]
         },
         {
-          "id": "5.55",
+          "annotation": "ENG:5.55",
+          "number": 55,
           "name": "Using Conjunctions",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
+          "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"]
         },
         {
-          "id": "5.56",
+          "annotation": "ENG:5.56",
+          "number": 56,
           "name": "Using Simple, Compound, and Complex Sentences",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
+          "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"]
         },
         {
-          "id": "5.57",
+          "annotation": "ENG:5.57",
+          "number": 57,
           "name": "Spelling",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
+          "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"]
         }
       ]
     },
     {
+      "annotation": "ENG:6",
       "number": 6,
-      "name": "Extensive Reading",
+      "name": "EXTENSIVE READING",
+      "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"],
       "substrands": [
         {
-          "id": "6.58",
+          "annotation": "ENG:6.58",
+          "number": 58,
           "name": "Building the Love and Culture of Reading",
-          "lessons": [],
-          "curriculum": ["b4-english", "b5-english", "b6-english"]
+          "curriculums": ["ENG:B4", "ENG:B5", "ENG:B6"]
         }
       ]
     }

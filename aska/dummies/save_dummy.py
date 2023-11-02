@@ -1,37 +1,69 @@
-from django.db.utils import IntegrityError
-from records.models import *
 import json
+from django.db import IntegrityError
+from records.models import *
 
-json_data = None
+def load_data_from_json(json_file):
+    with open(json_file, 'r') as file:
+        data = json.load(file)
+        return data
 
-# Load curriculums data from json file
+def create_grades(data):
+    for grade in data:
+        obj, _ = Grade.objects.get_or_create(name=grade['name'], code=grade['code'])
 
-def curriculums_to_database():
-    # Create subejects and curriculums
-    with open("records/curriculums/curriculums.json", "r") as f:
-        json_data = json.load(f)
+def create_subjects(data):
+    for subject in data:
+        obj, _ = Subject.objects.get_or_create(name=subject['name'], code=subject['code'])
+
+def create_curriculums(data):
+    for curriculum_data in data:
+        grade = Grade.objects.get(code=curriculum_data['grade'])
+        subject = Subject.objects.get(code=curriculum_data['subject'])
+        Curriculum.objects.get_or_create(grade=grade, subject=subject)
+
+def create_strands_and_substrands(data):
+    for strand_data in data:
+        subject = Subject.objects.get(code=strand_data["curriculums"][0].split(":")[0])
+        strand = Strand.objects.create(number=strand_data['number'], name=strand_data['name'], subject=subject)
+        for cul_annote in strand_data["curriculums"]:
+            curriculum = Curriculum.objects.get(annotation=cul_annote)
+            strand.curriculums.add(curriculum)
+        strand.save()
         
-    for sb in json_data["subjects"]:
-        try:
-            sub = Subject.objects.create(name=sb["name"])
-            for grd in json_data["grades"]:
-                Curriculum.objects.create(subject=sub, grade=grd)
-        except IntegrityError:
-            pass
+        for substrand_data in strand_data['substrands']:
+            substrand = Substrand.objects.create(number=substrand_data['number'], name=substrand_data['name'], strand=strand)
+            for cul_annote in substrand_data["curriculums"]:
+                curriculum = Curriculum.objects.get(annotation=cul_annote)
+                substrand.curriculums.add(curriculum)
+            strand.save()
+        
 
-    for strand in json_data["strands"]:
-        st = Strand.objects.create(
-            name=strand["name"].upper(),
-            number=strand["number"],
-        )
+def create_regions_and_districts(data):
+    for region_data in data["regions"]:
+        Region.objects.create(code=region_data['code'], name=region_data['region'])
 
-        for substrand in strand["substrands"]:
-            sbtr = Substrand.objects.create(
-                strand=st,
-                name=substrand["name"],
-                number=int(substrand["id"].split(".")[-1]),
-            )
-            sbtr.curriculum.set(substrand["curriculum"])
+    for district_data in data['districts']:
+        region = Region.objects.get(code=district_data['region'])
+        District.objects.create(id=district_data['id'], name=district_data['name'], region=region)
 
 
+def create_dummy():
+    # json_file_path = 'records/curriculums/curriculums.json'
+    # data = load_data_from_json(json_file_path)
 
+    # create_grades(data["grades"])
+    # create_subjects((data["subjects"]))
+    # create_curriculums(data["curriculums"])
+    # create_strands_and_substrands(data["strands"])
+
+    # json_file_path = 'records/locations/locations.json'
+    # data = load_data_from_json(json_file_path)
+
+    # create_regions_and_districts(data)
+
+
+    pass
+
+
+if __name__ == "__main__":
+    create_dummy()

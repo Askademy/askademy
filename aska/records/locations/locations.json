@@ -1,4 +1,21 @@
 {
+  "regions": [
+    { "code": "ASH", "region": "Ashanti Region" },
+    { "code": "AHA", "region": "Ahafo Region" },
+    { "code": "BON", "region": "Bono East Region" },
+    { "code": "CEN", "region": "Central Region" },
+    { "code": "EAS", "region": "Eastern Region" },
+    { "code": "GRE", "region": "Greater Accra Region" },
+    { "code": "NTN", "region": "Northern Region" },
+    { "code": "NEA", "region": "North East Region" },
+    { "code": "SVA", "region": "Savannah Region" },
+    { "code": "UPW", "region": "Upper West Region" },
+    { "code": "WES", "region": "Western Region" },
+    { "code": "UPE", "region": "Upper East Region" },
+    { "code": "VOL", "region": "Volta Region" },
+    { "code": "WNO", "region": "Western North Region" },
+    { "code": "OTI", "region": "Oti Region" }
+  ],
   "districts": [
     { "id": 1, "name": "Abura/Asebu/Kwamankese", "region": "CEN" },
     { "id": 2, "name": "Agona East", "region": "CEN" },

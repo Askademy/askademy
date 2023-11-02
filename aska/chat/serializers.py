@@ -1,7 +1,6 @@
 from rest_framework import serializers
 import random
-from records.users.models import CustomUser
-from .models import ChatMessage
+from records.models import CustomUser, ChatMessage
 
 
 class ChatMessageSerializer(serializers.ModelSerializer):

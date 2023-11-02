@@ -2,7 +2,7 @@ from django.urls import reverse
 from rest_framework import serializers
 import re
 
-from records.curriculums.models import (
+from records.models import (
     Curriculum,
     Strand,
     Substrand,
@@ -15,17 +15,6 @@ class LessonSerializer(serializers.ModelSerializer):
     strand = serializers.CharField(source="strand.name")
     substrand = serializers.CharField(source="substrand.name")
     url = serializers.SerializerMethodField()
-
-    def __init__(self, *args, **kwargs):
-        fields = kwargs.pop('fields', None)
-        super().__init__(*args, **kwargs)
-
-        if fields is not None:
-            # Update fields based on the provided list
-            allowed = set(fields)
-            existing = set(self.fields)
-            for field_name in existing - allowed:
-                self.fields.pop(field_name)
 
     def get_url(self, instance):
         abs_url = self.context["request"].build_absolute_uri
@@ -52,11 +41,11 @@ class LessonSerializer(serializers.ModelSerializer):
 
 
 class SubstrandSerializer(serializers.ModelSerializer):
-    lessons = LessonSerializer(many=True, fields=["topic", "url"])
+    # lessons = LessonSerializer(many=True)
 
     class Meta:
         model = Substrand
-        fields = ["number", "name", "lessons"]
+        fields = ["annotation", "name",]
 
 
 class StrandSerializer(serializers.ModelSerializer):
@@ -64,16 +53,19 @@ class StrandSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Strand
-        fields = ["number", "name", "substrands"]
+        fields = ["name", "annotation", "substrands"]
 
 
 class CurriculumSerializer(serializers.ModelSerializer):
-    strands = serializers.SerializerMethodField()
+    grade = serializers.CharField(source="grade.name")
     subject = serializers.CharField(source="subject.name")
+    strands = serializers.SerializerMethodField()
 
     def get_strands(self, instance):
-        abs_url = self.context["request"].build_absolute_uri
-        return abs_url(instance.strands_url)
+        return self.context["request"].build_absolute_uri(
+            reverse("api:curriculums-detail", args=[instance.annotation.lower()])
+        )
+
 
     class Meta:
         model = Curriculum

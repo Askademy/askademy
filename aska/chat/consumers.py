@@ -3,10 +3,9 @@ import json
 from channels.db import database_sync_to_async
 from channels.generic.websocket import AsyncWebsocketConsumer
 
-from chat.models import ChatMessage
+from records.models import ChatMessage, CustomUser
 
 from .serializers import ChatMessageSerializer
-from records.models import CustomUser
 
 class PrivateChatConsumer(AsyncWebsocketConsumer):
     @database_sync_to_async

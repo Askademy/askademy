@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
 from .models import CustomUser, UserSchool, PasswordResetRequest
-from chat.models import ChatMessage
+from records.others import ChatMessage
 
 
 class UserSchoolInline(admin.StackedInline):
