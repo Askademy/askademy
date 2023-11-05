@@ -23,28 +23,38 @@ def create_curriculums(data):
 
 def create_strands_and_substrands(data):
     for strand_data in data:
-        subject = Subject.objects.get(code=strand_data["curriculums"][0].split(":")[0])
-        strand = Strand.objects.create(number=strand_data['number'], name=strand_data['name'], subject=subject)
-        for cul_annote in strand_data["curriculums"]:
-            curriculum = Curriculum.objects.get(annotation=cul_annote)
-            strand.curriculums.add(curriculum)
-        strand.save()
+        subject = Subject.objects.get(code=strand_data["annotation"].split(":")[0])
+        strand, created = Strand.objects.get_or_create(number=strand_data['number'], name=strand_data['name'], subject=subject)
+        if created:
+            for cul_annote in strand_data["curriculums"]:
+                curriculum = Curriculum.objects.get(annotation=cul_annote)
+                strand.curriculums.add(curriculum)
+            strand.save()
         
         for substrand_data in strand_data['substrands']:
-            substrand = Substrand.objects.create(number=substrand_data['number'], name=substrand_data['name'], strand=strand)
-            for cul_annote in substrand_data["curriculums"]:
-                curriculum = Curriculum.objects.get(annotation=cul_annote)
-                substrand.curriculums.add(curriculum)
-            strand.save()
+            substrand, created = Substrand.objects.get_or_create(number=substrand_data['number'], name=substrand_data['name'], strand=strand)
+            if created:
+                for cul_annote in substrand_data["curriculums"]:
+                    curriculum = Curriculum.objects.get(annotation=cul_annote)
+                    substrand.curriculums.add(curriculum)
+                strand.save()
         
 
 def create_regions_and_districts(data):
     for region_data in data["regions"]:
-        Region.objects.create(code=region_data['code'], name=region_data['region'])
+        Region.objects.get_or_create(
+            code=region_data['code'], 
+            name=region_data['name'], 
+            capital=region_data["capital"]
+        )
 
     for district_data in data['districts']:
         region = Region.objects.get(code=district_data['region'])
-        District.objects.create(id=district_data['id'], name=district_data['name'], region=region)
+        District.objects.get_or_create(
+            name=district_data['name'],
+            region=region,
+            capital=district_data["capital"]
+        )
 
 
 def create_dummy():
@@ -56,10 +66,10 @@ def create_dummy():
     # create_curriculums(data["curriculums"])
     # create_strands_and_substrands(data["strands"])
 
-    # json_file_path = 'records/locations/locations.json'
-    # data = load_data_from_json(json_file_path)
+    json_file_path = 'records/locations/locations.json'
+    data = load_data_from_json(json_file_path)
 
-    # create_regions_and_districts(data)
+    create_regions_and_districts(data)
 
 
     pass

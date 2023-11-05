@@ -27,7 +27,7 @@ class Curriculum(models.Model):
         super().save()
 
     def __str__(self):
-        return self.annotation
+        return f"{self.grade.code} {self.subject.name}"
     
     class Meta:
         ordering = ["subject__name", "grade"]
@@ -45,7 +45,7 @@ class Strand(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.annotation
+        return f"{self.annotation} {self.name}"
 
 
 class Substrand(models.Model):
@@ -60,15 +60,15 @@ class Substrand(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.annotation
+        return f"{self.annotation} {self.name}"
 
 
 class ContentStandard(models.Model):
     annotation = models.CharField(max_length=100, unique=True, editable=False)
     number = models.PositiveSmallIntegerField()
     description = models.TextField()
-    substrand = models.ForeignKey(Substrand, related_name="content_standards", on_delete=models.CASCADE)
     curriculum = models.ForeignKey(Curriculum, related_name="content_standards", on_delete=models.CASCADE)
+    substrand = models.ForeignKey(Substrand, related_name="content_standards", on_delete=models.CASCADE)
 
     def save(self, *args, **kwargs):
         subject = self.curriculum.subject.code
@@ -85,7 +85,7 @@ class ContentStandard(models.Model):
 class LearningIndicator(models.Model):
     number = models.PositiveSmallIntegerField()
     name = models.CharField(max_length=1000)
-    standard = models.ForeignKey(ContentStandard, related_name="indicators", on_delete=models.CASCADE)
+    standard = models.ForeignKey(ContentStandard, related_name="indicators", verbose_name="Content standard", on_delete=models.CASCADE)
     annotation = models.CharField(max_length=100, unique=True, editable=False)
 
     def save(self, *args, **kwargs):

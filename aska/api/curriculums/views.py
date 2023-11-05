@@ -1,3 +1,4 @@
+import numbers
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework import viewsets
@@ -14,12 +15,12 @@ from records.curriculums.serializers import (
     StrandSerializer,
     LessonSerializer,
 )
-# from .filters import (
-#     DynamicFilterBackend,
+from .filters import (
+    DynamicFilterBackend,
+    CurriculumFilter,
 #     LessonFilter,
-#     CurriculumFilter,
 #     QuestionFilter,
-# )
+)
 
 
 class CurriculumViewSet(viewsets.ModelViewSet):
@@ -34,12 +35,12 @@ class CurriculumViewSet(viewsets.ModelViewSet):
     }
     lookup_url_kwarg = "curriculum"
     lookup_value_regex = "\w+:\w+\d+"
-    # filter_backends = [DynamicFilterBackend]
-    # filterset_classes = {
-    #     "list": CurriculumFilter,
-    #     "lessons": LessonFilter,
-    #     "lesson_questions": QuestionFilter,
-    # }
+    filter_backends = [DynamicFilterBackend]
+    filterset_classes = {
+        "list": CurriculumFilter,
+        # "lessons": LessonFilter,
+        # "lesson_questions": QuestionFilter,
+    }
 
     def get_serializer_class(self):
         if self.serializer_class:
@@ -64,7 +65,7 @@ class CurriculumViewSet(viewsets.ModelViewSet):
 
     @action(detail=True, queryset=Lesson.objects.all(), url_path="(?P<lesson>[^/.]+)")
     def lesson(self, *args, **kwargs):
-        lesson = get_object_or_404(self.get_queryset(), slug=kwargs["lesson"])
+        lesson = get_object_or_404(self.get_queryset(), number=kwargs["lesson"])
         serializer = self.get_serializer(lesson)
         return Response(serializer.data)
 

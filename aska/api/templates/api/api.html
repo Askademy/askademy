@@ -24,8 +24,8 @@
 {% block userlinks %}
 {% if user.is_authenticated %}
 <li class="navbar-text">{{user.get_full_name}}</li>
-<a href="{% url 'api:logout' %}" class="navbar-text">Logout</a>
+<a href="{% url 'api:auth-logout' %}" class="navbar-text">Logout</a>
 {% else %}
-<a href="{% url 'api:login' %}" class="navbar-text">Login</a>
+<a href="{% url 'api:auth-login' %}" class="navbar-text">Login</a>
 {% endif %}
 {% endblock %}

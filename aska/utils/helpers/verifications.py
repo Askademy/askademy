@@ -5,25 +5,21 @@ from django.core.mail import send_mail
 from twilio.rest import Client
 
 
-def send_verification_code_to_user(
-    request, password_reset_request, send_to="phone_and_email"
-):
+def send_verification_code_to_user(request, password_reset_request, send_to="email"):
     # Get the app name from the resolved URL
     user = password_reset_request.user
     code = password_reset_request.code
-    received_list = []
 
     # Send the verification code to the user's phone number
-    if send_to in ("phone_and_email", "phone"):
+    if send_to == "phone":
         client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
         message = client.messages.create(
             body=f"Your verification code is {code}",
             from_=settings.TWILIO_PHONE_NUMBER,
             to=user.phone_number,
         )
-        received_list.append(user.phone_number)
         
-    if send_to in ("phone_and_email", "email") and user.email:
+    if send_to == "email":
         reset_link = request.build_absolute_uri(
             reverse(f"web:reset-password", kwargs={"user": user.id})
         )
@@ -32,5 +28,4 @@ def send_verification_code_to_user(
         from_email = settings.EMAIL_HOST_USER
         recipient_list = [user.email]
         send_mail(subject, message, from_email, recipient_list, fail_silently=False)
-        received_list.append(user.email)
-    return " or ".join(received_list)
+    return "Message sent successfully"

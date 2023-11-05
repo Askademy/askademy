@@ -8,12 +8,14 @@ from .views import (
     AssessmentViewSet,
     SearchViewSet,
     FeedsViewSet,
+    AuthViewSet,
 )
 
 app_name = "api"
 
 router = DefaultRouter()
 
+router.register(r"auth", AuthViewSet, basename="auth")
 router.register(r"users", UserProfileViewSet, basename="users")
 router.register(r"schools", SchoolProfileViewSet, basename="schools")
 router.register(r"curriculums", viewset=CurriculumViewSet, basename="curriculums")
@@ -21,8 +23,7 @@ router.register(r"assessments", AssessmentViewSet, basename="assessments")
 router.register(r"search", SearchViewSet, basename="search")
 router.register(r"feeds", FeedsViewSet, basename="feeds")
 
-
 urlpatterns = [
     path(r"", include(router.urls)),
-    path(r"auth/", include("api.users.urls")),
+    # path(r"auth1/", include("api.users.urls")),
 ]

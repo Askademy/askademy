@@ -50,6 +50,7 @@ class SubstrandSerializer(serializers.ModelSerializer):
 
 class StrandSerializer(serializers.ModelSerializer):
     substrands = SubstrandSerializer(many=True)
+    # url = serializers.HyperlinkedIdentityField()
 
     class Meta:
         model = Strand

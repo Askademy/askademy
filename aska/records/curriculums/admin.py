@@ -2,6 +2,7 @@ from django.contrib import admin
 
 from .models import ContentStandard, Grade, LearningIndicator, Subject, Curriculum, Strand, Substrand, Lesson
 
+
 @admin.register(Grade)
 class GradeAdmin(admin.ModelAdmin):
     list_display = ["name", "number_of_subjects"]
@@ -33,6 +34,7 @@ class CurriculumAdmin(admin.ModelAdmin):
     list_filter = ["grade__name", "subject__name"]
     list_display = ["subject", "grade_code", "number_of_strands", "number_of_substrands"]
     search_fields = ["subject__name", "grade__name"]
+    autocomplete_fields = ["subject"]
 
     @admin.display(description="grade")
     def grade_code(self, obj):
@@ -54,6 +56,7 @@ class StrandAdmin(admin.ModelAdmin):
         model = Substrand
     
     inlines = [SubstrandInline]
+    autocomplete_fields = ["subject", "curriculums"]
     search_fields = ["name"]
     list_filter = ["curriculums__grade", "curriculums__subject"]
     list_display = ["name", "number_of_substrands"]
@@ -67,11 +70,27 @@ class StrandAdmin(admin.ModelAdmin):
 class SubstrandAdmin(admin.ModelAdmin):
     list_display = ["name", "strand_name"]
     search_fields = ["name"]
+    autocomplete_fields = ["strand", "curriculums"]
     list_filter = ["curriculums__grade", "curriculums__subject"]
 
     @admin.display(description="strand")
     def strand_name(self, obj):
         return obj.strand.name
+
+@admin.register(ContentStandard)
+class ContentStandardAdmin(admin.ModelAdmin):
+    class IndicatorInline(admin.StackedInline):
+        model = LearningIndicator
+
+    inlines = [IndicatorInline]
+    search_fields = ["curriculum", "substrand"]
+    autocomplete_fields = ["curriculum", "substrand"]
+
+
+@admin.register(LearningIndicator)
+class LearningIndicatorAdmin(admin.ModelAdmin):
+    autocomplete_fields = ["standard"]
+    search_fields = ["standard"]
 
 
 @admin.register(Lesson)
@@ -83,6 +102,3 @@ class LessonAdmin(admin.ModelAdmin):
     def curriculum(self, instance):
         return "%s %s" % (instance.grade, instance.subject)
 
-
-
-admin.site.register([ContentStandard, LearningIndicator])

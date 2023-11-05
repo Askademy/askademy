@@ -94,19 +94,16 @@ class CustomUser(AbstractUser):
         names = (self.first_name, self.middle_name, self.last_name)
         return " ".join((name for name in names if name))
 
-    def get_info(self, appname="api"):
+    def get_info(self, request=None, app_name="api"):
         """
         Returns a dictionary of user information, including full name, email,
         phone number, birthdate, gender, and profile picture URL.
         """
-        url = {"api": self.get_api_abs_url(), "web": self.get_web_abs_url()}
         return {
             "id": self.id,
             "username": self.get_full_name(),
-            "profile_picture": self.profile_picture.url
-            if self.profile_picture
-            else None,
-            "profile": url[appname]
+            "profile_picture": reverse("media", args=[self.profile_picture.url]) if self.profile_picture else None,
+            "profile_url": reverse("users-detail", current_app=app_name)
         }
 
     def get_current_school(self):

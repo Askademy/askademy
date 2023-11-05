@@ -3,19 +3,19 @@ from django_filters import rest_framework as filters
 from records.models import Lesson, Curriculum, Question
 
 
-class LessonFilter(filters.FilterSet):
-    class Meta:
-        model = Lesson
-        fields = {
-            "number": ["exact"],
-            "grade": ["exact"],
-            "subject": ["exact"],
-            "subject__name": ["icontains"],
-            "strand__name": ["icontains"],
-            "substrand__name": ["icontains"],
-            "topic": ["icontains"],
-            "content": ["icontains"],
-        }
+# class LessonFilter(filters.FilterSet):
+#     class Meta:
+#         model = Lesson
+#         fields = {
+#             "number": ["exact"],
+#             "grade": ["exact"],
+#             "subject": ["exact"],
+#             "subject__name": ["icontains"],
+#             "strand__name": ["icontains"],
+#             "substrand__name": ["icontains"],
+#             "topic": ["icontains"],
+#             "content": ["icontains"],
+#         }
 
 
 class CurriculumFilter(filters.FilterSet):
@@ -24,14 +24,14 @@ class CurriculumFilter(filters.FilterSet):
         fields = ["grade", "subject"]
 
 
-class QuestionFilter(filters.FilterSet):
-    class Meta:
-        model = Question
-        fields = {
-            "question_type": ["exact"],
-            "text": ["icontains"],
-            "lesson__topic": ["icontains"],
-        }
+# class QuestionFilter(filters.FilterSet):
+#     class Meta:
+#         model = Question
+#         fields = {
+#             "question_type": ["exact"],
+#             "text": ["icontains"],
+#             "lesson__topic": ["icontains"],
+#         }
 
 
 class DynamicFilterBackend(filters.DjangoFilterBackend):

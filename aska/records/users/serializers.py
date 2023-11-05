@@ -1,9 +1,12 @@
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
+from rest_framework.fields import empty
 from rest_framework.serializers import ValidationError
 
+from django.urls import reverse
 from django.conf import settings
 from django.db.models import Q
+from django.contrib.auth.hashers import make_password
 from django.contrib.auth import authenticate
 
 from . import choices
@@ -14,21 +17,16 @@ from records.users.models import (
     PasswordResetRequest,
 )
 
-
 class ForgotPasswordSerializer(serializers.Serializer):
-    phone_or_email = serializers.CharField()
-    send_to = serializers.ChoiceField(
-        choices=choices.SEND_CODE_TO, label="Send code to"
-    )
+    phone_number = serializers.CharField()
+    send_to = serializers.ChoiceField(choices=choices.SEND_CODE_TO, label="Send code to")
 
     def get_user(self):
         # Get the user using the given data
-        phone_or_email = self.initial_data["phone_or_email"]
+        phone_number = self.initial_data["phone_number"]
         try:
-            return CustomUser.objects.get(
-                Q(phone_number=phone_or_email) | Q(email=phone_or_email)
-            )
-        except:
+            return CustomUser.objects.get(phone_number=phone_number)
+        except CustomUser.DoesNotExist:
             return None
 
     def validate_send_to(self, send_to):
@@ -37,25 +35,19 @@ class ForgotPasswordSerializer(serializers.Serializer):
         if send_to == "email" and not user_has_email:
             raise serializers.ValidationError("The user has no email address")
         elif send_to == "phone" and not settings.CAN_SEND_SMS:
-            raise serializers.ValidationError(
-                "Sorry, we are not able to send sms. Please try other option"
-            )
+            raise serializers.ValidationError("Sorry, we are not able to send sms. Please try other option")
         return send_to
 
-    def validate_phone_or_email(self, phone_or_email):
+    def validate_phone_number(self, phone_number):
         try:
-            user = CustomUser.objects.get(
-                Q(phone_number=phone_or_email) | Q(email=phone_or_email)
-            )
+            user = CustomUser.objects.get(phone_number=phone_number)
         except CustomUser.DoesNotExist:
-            raise serializers.ValidationError(
-                "User with this phone number or email does not exist."
-            )
+            raise serializers.ValidationError("User with this phone number or email does not exist.")
         return user
 
     def create_password_reset_request(self):
         """Create a password reset request for the user"""
-        user = self.validated_data["phone_or_email"]
+        user = self.validated_data["phone_number"]
         PasswordResetRequest.objects.filter(user=user).delete()
         reset_request = PasswordResetRequest.objects.create(user=user)
         return reset_request
@@ -129,63 +121,61 @@ class LoginSerializer(serializers.Serializer):
     def to_representation(self, instance):
         user = instance["user"]
         token, created = Token.objects.get_or_create(user=user)
-        return {**user.get_info(), "token": token.key}
+        return {**user.get_info(self.context["request"]), "token": token.key}
+
+
+class RegisterUserSerializer(serializers.ModelSerializer):
+    def to_representation(self, user):
+        data = user.get_info(self.context["request"])
+        token = Token.objects.create(user=user)
+        return {**data, "token": token.key}
+    
+    def validate_password(self, password):
+        return make_password(password=password)
+    
+    class Meta:
+        model = CustomUser
+        fields = (
+            "id",
+            "first_name",
+            "middle_name",
+            "last_name",
+            "phone_number",
+            "birthdate",
+            "gender",
+            "profile_picture",
+            "password",
+        )
+
 
 class UserSerializer(serializers.ModelSerializer):
     username = serializers.ReadOnlyField(source="get_full_name")
     schools = serializers.SerializerMethodField("get_schools")
     level = serializers.ChoiceField(choices=choices.LEVEL, allow_blank=True)
     friendship = serializers.SerializerMethodField()
+    profile_url = serializers.HyperlinkedIdentityField("api:users-detail")
 
-    @property
-    def user(self):
-        return self.context["request"].user
-
-    @property
-    def action(self):
-        return self.context["view"].action
-
-    @property
-    def request(self):
-        return self.context["request"]
+    def __init__(self, instance=None, all_fields=False, **kwargs):
+        self.all_fields = all_fields
+        super().__init__(instance, **kwargs)
 
     def get_friendship(self, instance):
-        if self.user.is_authenticated:
-            return self.user.get_friendship_status(instance)
+        user = self.context["request"].user
+        if user.is_authenticated:
+            return user.get_friendship_status(instance)
         return None
 
     def get_schools(self, user):
-        schools = user.schools.all()
-        if user.schools:
-            return [sch.school.name for sch in schools]
-        return None
+        schools = user.schools.all() if user.schools else []
+        return [sch.school.name for sch in schools] or None
 
-    def get_fields(self):
-        fields = super().get_fields()
-        if self.action == "create":
-            fields.pop("is_active")
-        elif self.action == "update":
-            fields.pop("password")
-        return fields
-
-    def to_representation(self, user):
-        action = self.action
-        if action in ("update", "retrieve"):
-            return super().to_representation(user)
-        else:
-            data = user.get_info()
-            if action == "create":
-                token = Token.objects.create(user=user)
-                return {**data, "token": token.key}
-        return data
-
-    def create(self, validated_data):
-        user = super().create(validated_data)
-        user.set_password(validated_data["password"])
-        user.save()
-        return user
-
+    def get_field_names(self, declared_fields, info):
+        if not self.all_fields:
+            return ["id", "username", "profile_picture", "profile_url"]
+        return super().get_field_names(declared_fields, info)
+    
     class Meta:
+        model = CustomUser
         fields = (
             "id",
             "first_name",
@@ -199,20 +189,18 @@ class UserSerializer(serializers.ModelSerializer):
             "gender",
             "bio",
             "friendship",
-            "profile_picture",
-            "cover_picture",
             "schools",
             "subjects",
             "level",
             "points",
-            "date_joined",
             "is_active",
             "last_login",
-            "password",
+            "date_joined",
+            "cover_picture",
+            "profile_picture",
+            "profile_url",
         )
-        model = CustomUser
         extra_kwargs = {
-            "password": {"write_only": True},
             "points": {"read_only": True},
             "last_login": {"read_only": True},
             "date_joined": {"read_only": True},

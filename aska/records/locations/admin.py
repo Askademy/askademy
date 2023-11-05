@@ -8,6 +8,7 @@ class DistrictAdmin(admin.ModelAdmin):
     list_filter = ["region"]
     search_fields = ["name", "region__name"]
     list_display = ["name", "region"]
+    autocomplete_fields = ["region"]
 
 
 @admin.register(Region)
