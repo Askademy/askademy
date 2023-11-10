@@ -52,8 +52,14 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",
     "fontawesomefree",
     # Installed apps
-    "chat",
-    "records",
+    "assessments",
+    "chats",
+    "curriculums",
+    "feeds",
+    "locations",
+    "schools",
+    "users",
+
     "utils",
     "web",
     "api",
@@ -158,7 +164,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-AUTH_USER_MODEL = "records.CustomUser"
+AUTH_USER_MODEL = "users.CustomUser"
 
 
 # media files

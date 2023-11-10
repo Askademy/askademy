@@ -1,6 +1,8 @@
 import json
-from django.db import IntegrityError
-from records.models import *
+from curriculums.models import Curriculum, Grade, Subject, Substrand, Strand
+from locations.models import Region, District
+from schools.models import School
+from users.models import CustomUser
 
 def load_data_from_json(json_file):
     with open(json_file, 'r') as file:
@@ -57,8 +59,42 @@ def create_regions_and_districts(data):
         )
 
 
+def save_schools_to_database(data):
+    district = District.objects.get(name="Upper Denkyira West District")
+    for school in data["schools"]:
+        school = School.objects.get_or_create(
+            name=school["name"],
+            code=school["code"],
+            owner=school["owner"],
+            email=school["email"],
+            gender=school["gender"],
+            district=district,
+            town=school["town"],
+            digital_address=school["digital_address"],
+            location=school["location"],
+            description=school["description"],
+            date_established=school["date_established"],
+            visible=school["visible"],
+            logo=school["logo"]
+        )
+
+
+def store_users(user_data):
+    for data in user_data["users"]:
+        subjects_data = data.pop("subjects", [])  # Extract subjects data before creating the user
+        data.pop("profile_picture")
+        data.pop("cover_picture")
+        user, _ = CustomUser.objects.get_or_create(**data)
+
+        # Add subjects to the user
+        for subject_code in subjects_data:
+            subject = Subject.objects.get(code=subject_code)
+            user.subjects.add(subject)
+
+
+
 def create_dummy():
-    # json_file_path = 'records/curriculums/curriculums.json'
+    # json_file_path = 'curriculums/data.json'
     # data = load_data_from_json(json_file_path)
 
     # create_grades(data["grades"])
@@ -66,12 +102,19 @@ def create_dummy():
     # create_curriculums(data["curriculums"])
     # create_strands_and_substrands(data["strands"])
 
-    json_file_path = 'records/locations/locations.json'
+    # json_file_path = 'locations/data.json'
+    # data = load_data_from_json(json_file_path)
+    # create_regions_and_districts(data)
+
+
+    # json_file_path = 'schools/data.json'
+    # data = load_data_from_json(json_file_path)
+    # save_schools_to_database(data)
+
+
+    json_file_path = 'users/data.json'
     data = load_data_from_json(json_file_path)
-
-    create_regions_and_districts(data)
-
-
+    store_users(data)
     pass
 
 

@@ -1,38 +1,12 @@
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView
 from django.views import generic
 
 
-from records.feeds.models import Post
-
-from . import dummy
+from feeds.models import Post
 
 
-class HomePageView(TemplateView):
-    template_name = "web/home.html"
-
-    def get_context_data(self, *args, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["posts"] = Post.objects.all()
-        return context
-
-
-class PostCreateView(generic.CreateView):
-    template_name = "posts/create_post.html"
-    model = Post
-    fields = ("content", "image", )
-    success_url = reverse_lazy('web:home') 
-
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        return super().form_valid(form)
-    
-
-class PostDetailView(generic.DetailView):
-    template_name = "posts/post_detail.html"
-    queryset = Post.objects.all()
 
 
 def about_view(request):

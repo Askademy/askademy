@@ -1,15 +1,16 @@
 from django.urls import path, include
 
-from . import views
+from users.views import HomePageView
+from .views import about_view, search_results
 
 app_name = "web"
 
 urlpatterns = [
-    path("", views.HomePageView.as_view(), name="home"),
-    path("post/create/", views.PostCreateView.as_view(), name="create-post"),
-    path("post/<int:pk>/", views.PostDetailView.as_view(), name="post-detail"),
-    path("search/", views.search_results, name="search"),
-    path("about/", views.about_view, name="about-askademy"),
-    path("curriculums/", include("web.curriculums.urls")),
-    path("", include("web.users.urls")),
+    path("", HomePageView.as_view(), name="home"),
+    path("search/", search_results, name="search"),
+    path("about/", about_view, name="about-askademy"),
+    path("chat/", include("chats.urls")),
+    path("curriculums/", include("curriculums.urls")),
+    path("feeds/", include("feeds.urls")),
+    path("", include("users.urls")),
 ]
