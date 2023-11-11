@@ -1,10 +1,13 @@
 from django.contrib import admin
-
 from .models import ContentStandard, Grade, LearningIndicator, Subject, Curriculum, Strand, Substrand, Lesson
 
+class CurriculumInline(admin.StackedInline):
+        model = Curriculum
+        extra = 0
 
 @admin.register(Grade)
 class GradeAdmin(admin.ModelAdmin):
+    inlines = [CurriculumInline]
     list_display = ["name", "number_of_subjects"]
     search_fields = ["code", "name"]
 
@@ -15,10 +18,6 @@ class GradeAdmin(admin.ModelAdmin):
 
 @admin.register(Subject)
 class SubjectAdmin(admin.ModelAdmin):
-    class CurriculumInline(admin.StackedInline):
-        model = Curriculum
-        extra = 0
-
     inlines = [CurriculumInline]
     search_fields = ["name"]
     list_filter = ["curriculums__grade__name"]
@@ -68,14 +67,27 @@ class StrandAdmin(admin.ModelAdmin):
 
 @admin.register(Substrand)
 class SubstrandAdmin(admin.ModelAdmin):
+    class ContentStandardInline(admin.StackedInline):
+        def get_formset(self, request, obj=None, **kwargs):
+            formset = super().get_formset(request, obj, **kwargs)
+            if obj:  # obj is the Substrand instance
+                formset.form.base_fields['curriculum'].queryset = obj.curriculums.all()
+            return formset
+        
+        model = ContentStandard
+        extra = 1
+
+
     list_display = ["name", "strand_name"]
     search_fields = ["name"]
     autocomplete_fields = ["strand", "curriculums"]
     list_filter = ["curriculums__grade", "curriculums__subject"]
+    inlines = [ContentStandardInline]
 
     @admin.display(description="strand")
     def strand_name(self, obj):
         return obj.strand.name
+    
 
 @admin.register(ContentStandard)
 class ContentStandardAdmin(admin.ModelAdmin):

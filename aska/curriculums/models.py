@@ -79,7 +79,7 @@ class ContentStandard(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.name
+        return self.description
 
 
 class LearningIndicator(models.Model):
@@ -92,6 +92,9 @@ class LearningIndicator(models.Model):
         standard_annotation = self.standard.annotation
         self.annotation = f"{standard_annotation}.{self.number}"
         super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.name
     
 
 class Lesson(models.Model):

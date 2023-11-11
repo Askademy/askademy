@@ -10,10 +10,8 @@
         "birthdate": "1998-07-22",
         "bio": "Aspiring scientist with a love for art.",
         "level": "JHS",
-        "subjects": ["ENG", "CAE"],
-        "points": 85,
-        "profile_picture": "users/sophie.jpg",
-        "cover_picture": "users/sophie_cover.jpg"
+        "subjects": [],
+        "points": 85
       },
       {
         "nickname": "Olivia",
@@ -24,11 +22,9 @@
         "gender": "female",
         "birthdate": "1997-04-05",
         "bio": "Bookworm with a passion for storytelling.",
-        "level": "SHS",
+        "level": null,
         "subjects": ["ENG", "HIS", "RME"],
-        "points": 110,
-        "profile_picture": "users/olivia.jpg",
-        "cover_picture": "users/olivia_cover.jpg"
+        "points": 110
       },
       {
         "nickname": "Emma",
@@ -41,9 +37,7 @@
         "bio": "Aspiring mathematician and music enthusiast.",
         "level": "JHS",
         "subjects": ["MATH", "CAE", "PE"],
-        "points": 95,
-        "profile_picture": "users/emma.jpg",
-        "cover_picture": "users/emma_cover.jpg"
+        "points": 95
       },
       {
         "nickname": "Ava",
@@ -54,11 +48,9 @@
         "gender": "female",
         "birthdate": "2000-02-20",
         "bio": "Nature lover and aspiring environmentalist.",
-        "level": "SHS",
+        "level": null,
         "subjects": ["SCI", "OWOP"],
-        "points": 130,
-        "profile_picture": "users/ava.jpg",
-        "cover_picture": "users/ava_cover.jpg"
+        "points": 130
       },
       {
         "nickname": "Mia",
@@ -71,9 +63,7 @@
         "bio": "Adventurous spirit with a love for photography.",
         "level": "JHS",
         "subjects": ["CAE", "PE"],
-        "points": 80,
-        "profile_picture": "users/mia.jpg",
-        "cover_picture": "users/mia_cover.jpg"
+        "points": 80
       },
       {
         "nickname": "Alex",
@@ -86,9 +76,7 @@
         "bio": "Passionate about learning and growing.",
         "level": "SHS",
         "subjects": ["ENG", "MATH", "COM"],
-        "points": 120,
-        "profile_picture": "users/alex.jpg",
-        "cover_picture": "users/alex_cover.jpg"
+        "points": 120
       },
       {
         "nickname": "Jackson",
@@ -99,11 +87,9 @@
         "gender": "male",
         "birthdate": "1992-11-10",
         "bio": "Explorer of the world and its wonders.",
-        "level": "SHS",
+        "level": null,
         "subjects": ["HIS", "OWOP", "PE"],
-        "points": 150,
-        "profile_picture": "users/jackson.jpg",
-        "cover_picture": "users/jackson_cover.jpg"
+        "points": 150
       },
       {
         "nickname": "Liam",
@@ -116,9 +102,7 @@
         "bio": "Sports enthusiast with a passion for technology.",
         "level": "JHS",
         "subjects": ["MATH", "COM"],
-        "points": 100,
-        "profile_picture": "users/liam.jpg",
-        "cover_picture": "users/liam_cover.jpg"
+        "points": 100
       },
       {
         "nickname": "Aiden",
@@ -131,9 +115,7 @@
         "bio": "Creative thinker and aspiring artist.",
         "level": "SHS",
         "subjects": ["CAE", "RME"],
-        "points": 110,
-        "profile_picture": "users/aiden.jpg",
-        "cover_picture": "users/aiden_cover.jpg"
+        "points": 110
       },
       {
         "nickname": "Lucas",
@@ -146,9 +128,7 @@
         "bio": "Tech geek with a love for science fiction.",
         "level": "JHS",
         "subjects": ["COM", "SCI", "OWOP"],
-        "points": 90,
-        "profile_picture": "users/lucas.jpg",
-        "cover_picture": "users/lucas_cover.jpg"
+        "points": 90
       },
       {
         "nickname": "Ethan",
@@ -161,9 +141,7 @@
         "bio": "Dreamer and aspiring entrepreneur.",
         "level": "JHS",
         "subjects": ["MATH", "SCI", "CAE"],
-        "points": 95,
-        "profile_picture": "users/ethan.jpg",
-        "cover_picture": "users/ethan_cover.jpg"
+        "points": 95
       },
       {
         "nickname": "Mason",
@@ -176,9 +154,7 @@
         "bio": "Adventurous soul with a love for history.",
         "level": "SHS",
         "subjects": ["HIS", "OWOP"],
-        "points": 125,
-        "profile_picture": "users/mason.jpg",
-        "cover_picture": "users/mason_cover.jpg"
+        "points": 0
       },
       {
         "nickname": "Logan",
@@ -189,11 +165,9 @@
         "gender": "male",
         "birthdate": "1994-02-12",
         "bio": "Athlete and aspiring sports analyst.",
-        "level": "JHS",
+        "level": "UPP",
         "subjects": ["PE", "COM"],
-        "points": 80,
-        "profile_picture": "users/logan.jpg",
-        "cover_picture": "users/logan_cover.jpg"
+        "points": 80
       },
       {
         "nickname": "Emily",
@@ -204,11 +178,9 @@
         "gender": "female",
         "birthdate": "1999-11-05",
         "bio": "Artistic mind with a flair for languages.",
-        "level": "SHS",
+        "level": "UPP",
         "subjects": ["CAE", "GHL"],
-        "points": 110,
-        "profile_picture": "users/emily.jpg",
-        "cover_picture": "users/emily_cover.jpg"
+        "points": 0
       },
       {
         "nickname": "Lily",
@@ -221,9 +193,7 @@
         "bio": "Nature enthusiast with a love for poetry.",
         "level": "JHS",
         "subjects": ["ENG", "RME"],
-        "points": 90,
-        "profile_picture": "users/lily.jpg",
-        "cover_picture": "users/lily_cover.jpg"
+        "points": 9
       },
       {
         "nickname": "Noah",
@@ -236,9 +206,7 @@
         "bio": "Musician and technology enthusiast.",
         "level": "SHS",
         "subjects": ["COM", "MATH"],
-        "points": 130,
-        "profile_picture": "users/noah.jpg",
-        "cover_picture": "users/noah_cover.jpg"
+        "points": 130
       },
       {
         "nickname": "Abigail",
@@ -251,9 +219,7 @@
         "bio": "Book lover and aspiring author.",
         "level": "JHS",
         "subjects": ["ENG", "CAE"],
-        "points": 85,
-        "profile_picture": "users/abigail.jpg",
-        "cover_picture": "users/abigail_cover.jpg"
+        "points": 85
       },
       {
         "nickname": "Logan",
@@ -266,9 +232,7 @@
         "bio": "Explorer of the mind and the outdoors.",
         "level": "SHS",
         "subjects": ["HIS", "OWOP", "PE"],
-        "points": 140,
-        "profile_picture": "users/logan2.jpg",
-        "cover_picture": "users/logan2_cover.jpg"
+        "points": 140
       },
       {
         "nickname": "Emily",
@@ -281,9 +245,7 @@
         "bio": "Inquisitive mind with a passion for science.",
         "level": "JHS",
         "subjects": ["SCI", "COM"],
-        "points": 95,
-        "profile_picture": "users/emily2.jpg",
-        "cover_picture": "users/emily2_cover.jpg"
+        "points": 95
       },
       {
         "nickname": "James",
@@ -296,9 +258,7 @@
         "bio": "Tech enthusiast and aspiring inventor.",
         "level": "SHS",
         "subjects": ["COM", "MATH", "ENG"],
-        "points": 160,
-        "profile_picture": "users/james.jpg",
-        "cover_picture": "users/james_cover.jpg"
+        "points": 160
       }
     ]
   }

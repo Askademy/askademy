@@ -7,6 +7,8 @@ from curriculums.models import (
     Curriculum,
     Strand,
     Substrand,
+    ContentStandard,
+    LearningIndicator,
     Lesson,
 )
 
@@ -40,18 +42,24 @@ class LessonSerializer(serializers.ModelSerializer):
             "url",
         ]
 
+class ContentStandardSerializer(serializers.ModelSerializer):
+
+
+    class Meta:
+        model = ContentStandard
+        fields = ["annotation", "description"]
+
 
 class SubstrandSerializer(serializers.ModelSerializer):
-    # lessons = LessonSerializer(many=True)
+    content_standards = ContentStandardSerializer(many=True)
 
     class Meta:
         model = Substrand
-        fields = ["annotation", "name",]
+        fields = ["annotation", "name", "content_standards"]
 
 
 class StrandSerializer(serializers.ModelSerializer):
     substrands = SubstrandSerializer(many=True)
-    # url = serializers.HyperlinkedIdentityField()
 
     class Meta:
         model = Strand
